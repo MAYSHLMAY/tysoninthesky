@@ -484,6 +484,248 @@
     "When the pilot pulls back, the flaps retract automatically, causing a sudden loss of altitude"
    ],
    "at": 1793854417450
+  },
+  {
+   "s": "2.12 Boundary Layer Control Using Vortex Generators, Stall Wedges or Leading Edge Devices",
+   "q": "What does washout allow the pilot to retain during the stall?",
+   "c": "The pilot retains roll control during the stall because the wing root stalls before the wing tip.",
+   "w": [
+    "Full engine power and zero aerodynamic drag",
+    "Constant altitude without any drop in airspeed",
+    "Complete elimination of all boundary-layer friction"
+   ],
+   "at": 1793857029957
+  },
+  {
+   "s": "2.12 Boundary Layer Control Using Vortex Generators, Stall Wedges or Leading Edge Devices",
+   "q": "Why may an aircraft \"drop a wing\" even with washout?",
+   "c": "Even with washout, adverse boundary-layer air near the surface may behave badly and cause the outer wing part to stall first.",
+   "w": [
+    "Because the tailplane generates more lift than the main wings",
+    "Because the engine torque forces a roll to the left",
+    "Because fuel consumption lightens the left wing faster than the right"
+   ],
+   "at": 1793857029957
+  },
+  {
+   "s": "2.12 Boundary Layer Control Using Vortex Generators, Stall Wedges or Leading Edge Devices",
+   "q": "What are stall wedges (stall strips), and where are they mounted?",
+   "c": "Small, wedge-shaped strips mounted on the leading edge of the wings at about one-third span.",
+   "w": [
+    "Large aerodynamic plates mounted underneath the fuselage",
+    "Movable flaps installed on the trailing edge near the tips",
+    "Retractable slats built into the vertical stabilizer"
+   ],
+   "at": 1793857029957
+  },
+  {
+   "s": "2.12 Boundary Layer Control Using Vortex Generators, Stall Wedges or Leading Edge Devices",
+   "q": "What do stall wedges do at large angles of attack approaching the stall?",
+   "c": "They disrupt the boundary-layer airflow, ensuring the airflow breaks away (stalls) at the root end of the wing first.",
+   "w": [
+    "They increase total lift by 50% at supersonic speeds",
+    "They eliminate all induced drag from the wingtips",
+    "They lock the ailerons in a neutral position automatically"
+   ],
+   "at": 1793857029958
+  },
+  {
+   "s": "2.12 Boundary Layer Control Using Vortex Generators, Stall Wedges or Leading Edge Devices",
+   "q": "What do they do at smaller angles of attack?",
+   "c": "They produce an effect similar to a wing fence, resulting in a smoother airflow over the ailerons and retaining optimum roll control.",
+   "w": [
+    "They generate reverse thrust to slow down the aircraft",
+    "They cause the aircraft to enter an immediate steep dive",
+    "They decouple the flight controls from the wing surfaces"
+   ],
+   "at": 1793857029958
+  },
+  {
+   "s": "2.12 Boundary Layer Control Using Vortex Generators, Stall Wedges or Leading Edge Devices",
+   "q": "In Figure 2.53, what do the labels \"Stall Strip\" and \"Stall Warning\" point to?",
+   "c": "\"Stall Strip\" points to a small wedge-shaped strip on the leading edge near the root; \"Stall Warning\" points to a small tab (stall-warning sensor) a little further out.",
+   "w": [
+    "\"Stall Strip\" points to the landing flap; \"Stall Warning\" points to the altimeter",
+    "Both labels point to the main engine fuel injectors",
+    "Both labels point to the wingtip navigation lights"
+   ],
+   "at": 1793857029958
+  },
+  {
+   "s": "2.12 Boundary Layer Control Using Vortex Generators, Stall Wedges or Leading Edge Devices",
+   "q": "How do stall wedges differ from washout in how they make the root stall first?",
+   "c": "Washout changes the wing's geometry (the tip is set at a lower angle), whereas a stall wedge changes the airflow by deliberately disrupting it at the root end.",
+   "w": [
+    "Washout uses active electrical heating, while stall wedges use hydraulic pressure",
+    "Stall wedges change the weight distribution, while washout changes the engine power",
+    "There is no difference; both rely entirely on movable slats"
+   ],
+   "at": 1793857029958
+  },
+  {
+   "s": "2.12 Boundary Layer Control Using Vortex Generators, Stall Wedges or Leading Edge Devices",
+   "q": "What problem do vortex generators solve in the boundary layer?",
+   "c": "They inject fresh high-energy energy into the sluggish boundary layer air, preventing it from slowing down and separating prematurely.",
+   "w": [
+    "They cool down the engine exhaust gases before they touch the wing",
+    "They increase air density inside the cabin during high-altitude flight",
+    "They eliminate gravitational acceleration acting on the aircraft"
+   ],
+   "at": 1793857029959
+  },
+  {
+   "s": "2.12 Boundary Layer Control Using Vortex Generators, Stall Wedges or Leading Edge Devices",
+   "q": "What are vortex generators, and about how big are they?",
+   "c": "Small plates or wedges projecting up from the surface of an aerofoil, about 25 mm tall.",
+   "w": [
+    "Large folding wings spanning over 10 feet each",
+    "Retractable landing gear doors located beneath the cockpit",
+    "Massive external fuel tanks mounted under the wing roots"
+   ],
+   "at": 1793857029959
+  },
+  {
+   "s": "2.12 Boundary Layer Control Using Vortex Generators, Stall Wedges or Leading Edge Devices",
+   "q": "How tall are they compared with the typical boundary layer thickness?",
+   "c": "They are about three times the typical boundary layer thickness.",
+   "w": [
+    "They are exactly one-tenth of the boundary layer thickness",
+    "They are identical in height to the boundary layer thickness",
+    "They are fifty times taller than the boundary layer thickness"
+   ],
+   "at": 1793857029959
+  },
+  {
+   "s": "2.12 Boundary Layer Control Using Vortex Generators, Stall Wedges or Leading Edge Devices",
+   "q": "How do the vortices from vortex generators invigorate the boundary layer?",
+   "c": "They shed small, lively vortices from their tips that act as scavengers, mixing high-energy free-stream air into the sluggish boundary-layer air.",
+   "w": [
+    "They push hot exhaust air directly over the entire top surface of the wing",
+    "They create a complete vacuum that pulls the aircraft forward faster",
+    "They freeze the boundary-layer air to eliminate surface friction completely"
+   ],
+   "at": 1793857029959
+  },
+  {
+   "s": "2.12 Boundary Layer Control Using Vortex Generators, Stall Wedges or Leading Edge Devices",
+   "q": "What effect do they have on the transition point?",
+   "c": "They push the transition point (where smooth flow turns turbulent) backwards toward the trailing edge.",
+   "w": [
+    "They pull the transition point forward to the extreme leading edge",
+    "They eliminate the transition point entirely so flow remains laminar forever",
+    "They cause the transition point to shift off the wing into the atmosphere"
+   ],
+   "at": 1793857029960
+  },
+  {
+   "s": "2.12 Boundary Layer Control Using Vortex Generators, Stall Wedges or Leading Edge Devices",
+   "q": "Why is the drag of the vortices acceptable?",
+   "c": "Because the small amount of drag created by the vortices is far more than compensated by the considerable boundary-layer drag which they save.",
+   "w": [
+    "Because vortex drag is completely zero under all flight conditions",
+    "Because the FAA requires high drag to slow down during landings",
+    "Because vortex drag actually powers the aircraft's electrical system"
+   ],
+   "at": 1793857029960
+  },
+  {
+   "s": "2.12 Boundary Layer Control Using Vortex Generators, Stall Wedges or Leading Edge Devices",
+   "q": "What are the benefits of vortex generators at high speed?",
+   "c": "They weaken the shock wave at high speed and reduce shock drag.",
+   "w": [
+    "They increase the maximum cabin altitude limit instantly",
+    "They convert the aircraft into a supersonic interceptor automatically",
+    "They cool down the wing structure to prevent structural melting"
+   ],
+   "at": 1793857029960
+  },
+  {
+   "s": "2.12 Boundary Layer Control Using Vortex Generators, Stall Wedges or Leading Edge Devices",
+   "q": "What does downwash do to the local flow direction?",
+   "c": "It tilts the local approach flow direction downward relative to the free-stream flow.",
+   "w": [
+    "It accelerates the air straight upward over the cockpit canopy",
+    "It reverses the airflow completely so it travels from trailing to leading edge",
+    "It eliminates airflow velocity entirely behind the trailing edge"
+   ],
+   "at": 1793857029960
+  },
+  {
+   "s": "2.12 Boundary Layer Control Using Vortex Generators, Stall Wedges or Leading Edge Devices",
+   "q": "Why does the tilted resultant force contribute to drag, and what is that drag called?",
+   "c": "Because the resultant force is tilted backwards relative to the flight direction, its backward component contributes to induced drag.",
+   "w": [
+    "Because friction with the ground creates parasitic profile drag",
+    "Because engine exhaust creates an opposing thermal drag vector",
+    "Because cabin pressurization leaks create fuselage form drag"
+   ],
+   "at": 1793857029963
+  },
+  {
+   "s": "2.12 Boundary Layer Control Using Vortex Generators, Stall Wedges or Leading Edge Devices",
+   "q": "What happens to the effective angle of attack because of the downwash?",
+   "c": "It is reduced relative to the geometric angle (alpha_eff = alpha - alpha_i), meaning less lift unless the wing is tilted to a greater angle.",
+   "w": [
+    "It increases dramatically, causing an immediate high-speed stall",
+    "It remains completely identical to the geometric angle under all conditions",
+    "It drops to absolute zero, eliminating all aerodynamic forces"
+   ],
+   "at": 1793857029963
+  },
+  {
+   "s": "2.12 Boundary Layer Control Using Vortex Generators, Stall Wedges or Leading Edge Devices",
+   "q": "What is the relation between geometric angle, induced angle, and effective angle?",
+   "c": "Effective angle equals geometric angle minus induced angle (alpha_eff = alpha - alpha_i).",
+   "w": [
+    "Effective angle equals geometric angle plus induced angle multiplied by two",
+    "Effective angle equals induced angle divided by geometric angle squared",
+    "Effective angle is completely independent of induced angle"
+   ],
+   "at": 1793857029964
+  },
+  {
+   "s": "2.12 Boundary Layer Control Using Vortex Generators, Stall Wedges or Leading Edge Devices",
+   "q": "Is downwash entirely responsible for lift according to the source?",
+   "c": "No, while downwash changes momentum, trailing-edge vortices also produce a large upwash outboard of the tips, and upward/downward momentum changes cancel out.",
+   "w": [
+    "Yes, downwash is the sole and exclusive source of all aerodynamic lift on an aircraft",
+    "Yes, because air pressure above the wing plays zero role in flight generation",
+    "No, lift is created entirely by jet engine exhaust pushing against the ground"
+   ],
+   "at": 1793857029964
+  },
+  {
+   "s": "2.12 Boundary Layer Control Using Vortex Generators, Stall Wedges or Leading Edge Devices",
+   "q": "On what does downwash depend?",
+   "c": "It depends on wing circulation and varies with flight conditions.",
+   "w": [
+    "It depends strictly on the outside air temperature and humidity",
+    "It depends exclusively on the type of fuel burned in the engines",
+    "It remains completely constant regardless of airspeed or angle of attack"
+   ],
+   "at": 1793857029964
+  },
+  {
+   "s": "2.12 Boundary Layer Control Using Vortex Generators, Stall Wedges or Leading Edge Devices",
+   "q": "If the geometric angle is 10 degrees and the induced angle is 2.5 degrees, find the effective angle using alpha_eff = alpha - alpha_i.",
+   "c": "10 degrees - 2.5 degrees = 7.5 degrees.",
+   "w": [
+    "10 degrees + 2.5 degrees = 12.5 degrees",
+    "10 degrees * 2.5 degrees = 25 degrees",
+    "10 degrees / 2.5 degrees = 4 degrees"
+   ],
+   "at": 1793857029964
+  },
+  {
+   "s": "2.12 Boundary Layer Control Using Vortex Generators, Stall Wedges or Leading Edge Devices",
+   "q": "Minimum Radius Top Note: What produces the turning force required for a minimum radius turn?",
+   "c": "High turning force is achieved through lift, higher load factor, and flying near the stall boundary.",
+   "w": [
+    "Engine thrust pushing the aircraft sideways",
+    "Gravity pulling the nose downward into a spiral dive",
+    "Rudder deflection pushing tail air outward"
+   ],
+   "at": 1793857029964
   }
  ]
 }
