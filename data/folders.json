@@ -32,14 +32,9 @@
    "parent": "fmw3ji57bsp1"
   },
   {
-   "id": "fmw3ji8e83f1",
-   "name": "Material",
-   "parent": "root"
-  },
-  {
    "id": "fmw3ji8e8yuh",
    "name": "get_ready",
-   "parent": "fmw3ji8e83f1"
+   "parent": "root"
   },
   {
    "id": "fmw3ji6ajzu3",
