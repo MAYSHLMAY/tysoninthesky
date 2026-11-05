@@ -10,6 +10,11 @@
    "id": "aero2",
    "name": "Aerodynamics 2",
    "parent": "aero"
+  },
+  {
+   "id": "fmw32lmd02lz",
+   "name": "Influence of Load Factor",
+   "parent": "aero2"
   }
  ],
  "place": {
