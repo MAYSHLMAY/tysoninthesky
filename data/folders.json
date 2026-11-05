@@ -1,1 +1,22 @@
-{"v":1,"folders":[],"place":{}}
+{
+ "v": 1,
+ "folders": [
+  {
+   "id": "aero",
+   "name": "Aerodynamics",
+   "parent": "root"
+  },
+  {
+   "id": "aero2",
+   "name": "Aerodynamics 2",
+   "parent": "aero"
+  }
+ ],
+ "place": {
+  "dir:g:2.2": "aero2",
+  "dir:g:2.1": "aero2",
+  "dir:g:hard": "aero2",
+  "dir:g:pe": "aero2",
+  "dir:g:2.4": "aero2"
+ }
+}
