@@ -188,10 +188,12 @@ img,svg,input,select,textarea{max-width:100%}.set input[type=password],.set inpu
 .top h1{min-width:0;white-space:nowrap}.top .tools{flex:none}
 @media(max-width:600px){.pick b{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height:1.25;font-size:.92rem}.pick .pk{flex:none}}
 @media(max-width:380px){h1{font-size:1.08rem;gap:6px}.ico{width:36px;height:36px}.plus{flex-basis:46px}.card{padding:16px 14px 14px}.pick{padding:9px 12px;gap:8px}.cn{padding:7px 6px}}
+.mtag{font-size:.62rem;font-weight:700;padding:1px 6px;border-radius:6px;background:var(--accbg);color:var(--acc);margin-left:6px;letter-spacing:.05em;vertical-align:middle}
+#mdMsg{white-space:pre-wrap;font-size:.8rem;margin:8px 0;color:var(--mute)}
 </style></head><body>
 <div class="wrap">
 <div class="top"><h1><svg viewBox="0 0 24 24" width="22" height="22"><path d="M2 12 22 3l-5 18-5-7z" fill="currentColor"/></svg>Flight Recall</h1>
-<div class="tools"><button class="ico" id="undo" aria-label="Undo" title="Undo (Z)"></button><button class="ico" id="sbtn" aria-label="Search" title="Search (/)"></button><button class="ico" id="stbtn" aria-label="Statistics"></button><button class="ico" id="gear" aria-label="Settings"></button></div></div>
+<div class="tools"><button class="ico" id="undo" aria-label="Undo" title="Undo (Z)"></button><button class="ico" id="sbtn" aria-label="Search" title="Search (/)"></button><button class="ico" id="stbtn" aria-label="Statistics"></button><button class="ico" id="mdlbtn" aria-label="3D models" title="3D models"></button><button class="ico" id="gear" aria-label="Settings"></button></div></div>
 <p class="sub1" id="sub1"></p>
 <div class="path"><div class="track"></div><i id="fill"></i><span id="plane"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M2 12 22 3l-5 18-5-7z" fill="currentColor"/></svg></span></div>
 <div class="counts" id="counts"></div>
@@ -245,6 +247,10 @@ img,svg,input,select,textarea{max-width:100%}.set input[type=password],.set inpu
 <div class="row" style="margin-top:12px"><button class="ghost" id="dlIdx" type="button">Download data/index.json</button><button class="ghost" id="relock" type="button">Lock</button></div>
 </div></div></div></dialog>
 
+<dialog id="mdl" class="sheet"><div class="in"><header><h3>3D Models</h3><button class="ico" data-close aria-label="Close">✕</button></header><div class="sc">
+<p class="info">Model cards open in the 3D lab. Upload your own <b>.model.js</b> three.js file (first line <b>/* flight-recall-model */</b>) to add more.</p>
+<div class="row"><button class="solid" id="mdUp" type="button">Upload model .js</button><a class="ghost" href="models.html" style="text-decoration:none">Open 3D lab</a></div>
+<input type="file" id="mdFile" accept=".js,text/javascript" multiple hidden><div id="mdMsg"></div><div id="mdList" style="margin-top:10px"></div></div></div></dialog>
 <dialog id="fact" class="mini2"><div id="fbody"></div></dialog>
 <div class="hbar" id="hbar"><button class="y" data-c="y" aria-label="Yellow"></button><button class="g" data-c="g" aria-label="Green"></button><button class="p" data-c="p" aria-label="Pink"></button><button class="b" data-c="b" aria-label="Blue"></button><button class="pn" id="hpin" aria-label="Add note">📌</button></div>
 <div class="pop2" id="npop"><div class="cl"><button class="y" data-c="y"></button><button class="g" data-c="g"></button><button class="p" data-c="p"></button><button class="b" data-c="b"></button><span class="sp"></span></div><textarea id="ntxt" placeholder="Short note…" maxlength="400"></textarea><div class="rw"><button id="ndel">Remove</button><button id="nsave" class="sv">Save</button></div></div>
@@ -965,6 +971,24 @@ function oldData(){try{const g=k=>JSON.parse(localStorage.getItem(k)||'null'),S0
  if(!S0&&!(pk&&pk.length))return null;return{packs:pk||[],progress:S0?{S:S0,PE:g('flight-recall-pe-v1')}:null}}catch(e){return null}}
 $('legacy').onclick=()=>{const o=oldData();if(o){mergeData(o);$('legacy').hidden=true}};
 
+/* ---------- 3D models: their own card type, kept separate from question cards ---------- */
+const K_MOD='fr-models-v1',MARK=/^\s*\/\*\s*flight-recall-model\s*\*\//;
+const BUILTIN=[{id:'elevon',name:'Elevon (Flying Wing)',cat:'Control Surfaces',sub:'Elevons',desc:'Pitch and roll mixing on a flying wing'},{id:'ruddervator',name:'Ruddervator (V-Tail)',cat:'Control Surfaces',sub:'Ruddervators',desc:'Pitch and yaw mixing on a V-tail'}];
+IC.cube='<path d="M12 3 4 7.5v9L12 21l8-4.5v-9z"/><path d="M4 7.5 12 12l8-4.5M12 12v9"/>';$('mdlbtn').innerHTML=ic('cube');
+const mLoad=()=>{try{return JSON.parse(localStorage.getItem(K_MOD)||'null')||{items:[]}}catch(e){return{items:[]}}};
+const mSave=o=>{try{localStorage.setItem(K_MOD,JSON.stringify(o));return true}catch(e){return false}};
+function mRender(){const all=BUILTIN.map(b=>({...b,built:1})).concat(mLoad().items),cats=[...new Set(all.map(x=>x.cat))];
+ $('mdList').innerHTML=cats.map(c=>{const xs=all.filter(x=>x.cat===c);return`<details class="grp" open><summary><span><span class="gn">${esc(c)}</span> <span class="gm">${xs.length} model${xs.length>1?'s':''}</span></span></summary><div class="subs">`+
+  xs.map(x=>`<div class="frow" data-o="${attr(x.id)}"><span class="ic">🧊</span><span class="tx"><b>${esc(x.name)}<span class="mtag">MODEL</span></b><small>${esc((x.sub?x.sub+' · ':'')+String(x.desc||'').slice(0,80))}</small></span>${x.built?'':`<button class="go" data-x="${attr(x.id)}" aria-label="Remove">✕</button>`}</div>`).join('')+'</div></details>'}).join('')}
+$('mdList').onclick=e=>{const x=e.target.closest('[data-x]');if(x){e.stopPropagation();const o=mLoad();o.items=o.items.filter(i=>i.id!==x.dataset.x);mSave(o);mRender();return}
+ const r=e.target.closest('[data-o]');if(r)location.href='models.html#'+encodeURIComponent(r.dataset.o)};
+$('mdlbtn').onclick=()=>{mRender();$('mdl').showModal()};
+$('mdUp').onclick=()=>$('mdFile').click();
+$('mdFile').onchange=async e=>{const out=[];for(const f of e.target.files){try{const code=await f.text();if(!MARK.test(code))throw Error('first line must be /* flight-recall-model */');
+  const m=(await import(URL.createObjectURL(new Blob([code],{type:'text/javascript'})))).default;if(!m||!m.name||typeof m.build!=='function')throw Error('needs export default {name, build(THREE)}');
+  const o=mLoad(),cat=m.category||'Uncategorized',ex=o.items.find(i=>i.name===m.name&&i.cat===cat),it={id:ex?ex.id:'u-'+Date.now().toString(36),name:m.name,cat,sub:m.sub||'',desc:m.info||'',code};
+  if(ex)Object.assign(ex,it);else o.items.push(it);if(!mSave(o))throw Error('storage is full');out.push('✓ '+m.name+' added')}catch(x){out.push('✗ '+f.name+': '+x.message)}}
+ $('mdMsg').textContent=out.join('\n');mRender();e.target.value=''};
 /* ---------- plumbing ---------- */
 document.querySelectorAll('dialog').forEach(d=>{d.addEventListener('click',e=>{if(e.target===d||e.target.closest('[data-close]'))d.close()})});
 $('undo').onclick=doUndo;

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Flight Recall · 3D Lab</title>
+<style>
+:root{--bg:#FAF4EA;--card:#FFFDF8;--ink:#2E2218;--mute:#7A6A5A;--line:#E6D9C6;--acc:#CF5F27;--accbg:rgba(207,95,39,.12);--ok:#4B8A5A;--bad:#BF4330;--cv:#EFE6D6;color-scheme:light}
+@media(prefers-color-scheme:dark){:root{--bg:#1D1712;--card:#281F18;--ink:#F4E9DB;--mute:#B7A692;--line:#3D3226;--acc:#F0955A;--accbg:rgba(240,149,90,.15);--ok:#7CC38B;--bad:#F08A78;--cv:#14100c;color-scheme:dark}}
+*{box-sizing:border-box}html,body{margin:0;max-width:100%;overflow-x:hidden}
+body{font-family:"Avenir Next","Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--ink);padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
+.wrap{max-width:760px;margin:0 auto;padding:10px 14px 40px}
+.top{display:flex;align-items:center;gap:8px}.top a,.top button{color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;font:inherit;text-decoration:none;cursor:pointer}
+.top select{flex:1;min-width:0;font:inherit;padding:9px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);color:var(--ink)}
+#cv{position:relative;height:50vh;min-height:280px;margin:10px 0;border:1.5px solid var(--line);border-radius:18px;overflow:hidden;background:var(--cv)}
+#cv canvas{display:block;width:100%;height:100%;touch-action:none}
+#hud{position:absolute;left:10px;top:8px;font-size:.75rem;color:var(--mute);pointer-events:none}
+.bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.bar button,.tabs button{font:inherit;font-size:.85rem;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:7px 11px;cursor:pointer}
+.bar button.on,.tabs button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.tabs{display:flex;gap:6px;margin:6px 0 10px}.tabs button{flex:1;font-weight:650}
+.f{margin:12px 0}.f label{display:flex;justify-content:space-between;font-weight:600;font-size:.92rem}.f label b{color:var(--acc);font-variant-numeric:tabular-nums}
+.f small{display:block;color:var(--mute);font-size:.76rem;margin-top:1px}.f input{width:100%;accent-color:var(--acc);margin-top:6px}
+table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:8px}td{padding:7px 4px;border-top:1.5px solid var(--line)}td:last-child{text-align:right;font-weight:650;font-variant-numeric:tabular-nums}
+.part{display:block;width:100%;text-align:left;font:inherit;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;margin:6px 0;cursor:pointer}
+.part.on{border-color:var(--acc);background:var(--accbg)}.part small{display:block;color:var(--mute);margin-top:3px;line-height:1.4}
+.note{color:var(--mute);font-size:.85rem;line-height:1.55}#msg{font-size:.8rem;white-space:pre-wrap;color:var(--mute);margin:6px 0}#msg.err{color:var(--bad)}
+[hidden]{display:none!important}
+</style></head><body><div class="wrap">
+<div class="top"><a href="index.html">← Back</a><select id="sel" aria-label="Model"></select><button id="up">Upload .js</button><input type="file" id="file" accept=".js,text/javascript" hidden></div>
+<div id="msg"></div>
+<div id="cv"><div id="hud">Drag = orbit · pinch / wheel = zoom · tap a part</div></div>
+<div class="bar"><button id="swp">▶ Auto sweep</button><button id="wf">Wireframe</button><button id="rst">Reset</button></div>
+<div class="tabs"><button data-t="a" class="on">Adjust</button><button data-t="p">Parts</button><button data-t="i">Info</button></div>
+<div id="ta"><div class="f"><label>Exploded view <b id="exv">0%</b></label><input type="range" id="ex" min="0" max="1" step=".01" value="0"></div><div id="sl"></div><table id="ro"></table></div>
+<div id="tp" hidden></div><div id="ti" class="note" hidden></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const $=id=>document.getElementById(id),esc=t=>String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+const K='fr-models-v1',BUILT={elevon:'Elevon (Flying Wing)',ruddervator:'Ruddervator (V-Tail)'},MARK=/^\s*\/\*\s*flight-recall-model\s*\*\//;
+const store=()=>{try{return JSON.parse(localStorage.getItem(K)||'null')||{items:[]}}catch(e){return{items:[]}}};
+const say=(t,e)=>{$('msg').textContent=t||'';$('msg').className=e?'err':''};
+async function mod(code){if(!MARK.test(code))throw Error('first line must be /* flight-recall-model */');
+ const m=(await import(URL.createObjectURL(new Blob([code],{type:'text/javascript'})))).default;
+ if(!m||!m.name||typeof m.build!=='function')throw Error('needs export default {name, build(THREE)}');return m}
+async function codeOf(id){const it=store().items.find(x=>x.id===id);if(it)return it.code;
+ const r=await fetch('models/'+id+'.model.js');if(!r.ok)throw Error('models/'+id+'.model.js not found');return r.text()}
+/* ---- scene ---- */
+const cv=$('cv'),ren=new THREE.WebGLRenderer({antialias:true,alpha:true});ren.setPixelRatio(Math.min(devicePixelRatio,2));cv.appendChild(ren.domElement);
+const scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(45,1,.05,100);
+scene.add(new THREE.AmbientLight(0xffffff,.65));const dl=new THREE.DirectionalLight(0xffffff,.9);dl.position.set(2,4,3);scene.add(dl);
+const grid=new THREE.GridHelper(6,24,0x999999,0xbbbbbb);grid.position.y=-.4;grid.material.opacity=.35;grid.material.transparent=true;scene.add(grid);
+let th=.7,ph=1.15,rad=3.6,tg=new THREE.Vector3(0,0,.5);
+const place=()=>{cam.position.set(tg.x+rad*Math.sin(ph)*Math.sin(th),tg.y+rad*Math.cos(ph),tg.z+rad*Math.sin(ph)*Math.cos(th));cam.lookAt(tg)};
+const fit=()=>{const w=cv.clientWidth,h=cv.clientHeight;ren.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()};
+new ResizeObserver(fit).observe(cv);
+const Pt=new Map();let moved=0,pd=0;const dist=()=>{const a=[...Pt.values()];return Math.hypot(a[0][0]-a[1][0],a[0][1]-a[1][1])||1};
+ren.domElement.addEventListener('pointerdown',e=>{ren.domElement.setPointerCapture(e.pointerId);Pt.set(e.pointerId,[e.clientX,e.clientY]);moved=0;if(Pt.size==2)pd=dist()});
+ren.domElement.addEventListener('pointermove',e=>{const o=Pt.get(e.pointerId);if(!o)return;const dx=e.clientX-o[0],dy=e.clientY-o[1];Pt.set(e.pointerId,[e.clientX,e.clientY]);moved+=Math.abs(dx)+Math.abs(dy);
+ if(Pt.size==1){th-=dx*.01;ph=Math.min(3,Math.max(.2,ph-dy*.01))}else if(Pt.size==2){const d=dist();rad=Math.min(12,Math.max(.8,rad*pd/d));pd=d}place()});
+ren.domElement.addEventListener('pointerup',e=>{if(Pt.size==1&&moved<6)tap(e);Pt.delete(e.pointerId)});
+ren.domElement.addEventListener('pointercancel',e=>Pt.delete(e.pointerId));
+ren.domElement.addEventListener('wheel',e=>{e.preventDefault();rad=Math.min(12,Math.max(.8,rad*(1+e.deltaY*.001)));place()},{passive:false});
+/* ---- model ---- */
+let G=null,M=null,V={},base=new Map(),sel=null,wire=false,sweep=false,t0=0;
+const partOf=o=>{while(o&&!o.userData.part)o=o.parent;return o?o.userData.part:null};
+function mats(f){G.traverse(o=>{if(o.isMesh)f(o.material,partOf(o))})}
+function select(id){sel=sel===id?null:id;mats((m,p)=>m.emissive&&m.emissive.setHex(p&&p===sel?0x7a3a10:0));
+ document.querySelectorAll('.part').forEach(b=>b.classList.toggle('on',b.dataset.p===sel));if(sel)tab('p')}
+function tap(e){if(!G)return;const r=ren.domElement.getBoundingClientRect(),ray=new THREE.Raycaster();
+ ray.setFromCamera(new THREE.Vector2((e.clientX-r.left)/r.width*2-1,-((e.clientY-r.top)/r.height)*2+1),cam);
+ const h=ray.intersectObject(G,true).map(x=>partOf(x.object)).find(Boolean);if(h)select(h)}
+function refresh(){if(!G)return;M.update&&M.update(G,V,THREE);
+ $('ro').innerHTML=(M.readout?M.readout(V):[]).map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td></tr>`).join('')}
+function explode(a){$('exv').textContent=Math.round(a*100)+'%';base.forEach((b,o)=>o.position.set(b[0]+o.userData.ex[0]*a,b[1]+o.userData.ex[1]*a,b[2]+o.userData.ex[2]*a))}
+function tab(t){document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));$('ta').hidden=t!='a';$('tp').hidden=t!='p';$('ti').hidden=t!='i'}
+function reset(){(M.adjusters||[]).forEach(a=>{V[a.id]=a.value;const i=$('r_'+a.id);if(i){i.value=a.value;$('v_'+a.id).textContent=a.value+(a.unit||'')}});$('ex').value=0;explode(0);refresh()}
+async function open(id,code){say('');try{M=await mod(code||await codeOf(id))}catch(e){say('Could not load: '+e.message,1);return}
+ if(G){scene.remove(G);G.traverse(o=>{if(o.geometry)o.geometry.dispose()})}
+ G=M.build(THREE);scene.add(G);base=new Map();sel=null;sweep=false;$('swp').classList.remove('on');$('swp').textContent='▶ Auto sweep';
+ G.traverse(o=>{if(o.userData.ex)base.set(o,[o.position.x,o.position.y,o.position.z])});
+ const bb=new THREE.Box3().setFromObject(G),c=bb.getCenter(new THREE.Vector3()),s=bb.getSize(new THREE.Vector3());tg.copy(c);rad=Math.max(s.x,s.y,s.z)*1.8+.5;grid.position.y=bb.min.y-.1;place();
+ mats(m=>m.wireframe=wire);
+ V={};$('sl').innerHTML=(M.adjusters||[]).map(a=>{V[a.id]=a.value;return`<div class="f"><label>${esc(a.label)} <b id="v_${a.id}">${a.value}${esc(a.unit||'')}</b></label>${a.hint?`<small>${esc(a.hint)}</small>`:''}<input type="range" id="r_${a.id}" data-a="${a.id}" min="${a.min}" max="${a.max}" step="${a.step||1}" value="${a.value}"></div>`}).join('');
+ $('sl').querySelectorAll('input').forEach(i=>i.oninput=()=>{const a=M.adjusters.find(x=>x.id===i.dataset.a);V[a.id]=+i.value;$('v_'+a.id).textContent=i.value+(a.unit||'');refresh()});
+ $('tp').innerHTML=(M.parts||[]).map(p=>`<button class="part" data-p="${esc(p.id)}"><b>${esc(p.label)}</b><small>${esc(p.info||'')}</small></button>`).join('')||'<p class="note">This model has no part list.</p>';
+ $('tp').querySelectorAll('.part').forEach(b=>b.onclick=()=>select(b.dataset.p));
+ $('ti').innerHTML=`<b>${esc(M.name)}</b><br>${esc(M.category||'')}${M.sub?' › '+esc(M.sub):''}<p>${esc(M.info||'No description.')}</p><p>Units: 1 = 1 m. Nose toward −Z, right is +X. Positive deflection = trailing edge down.</p>`;
+ $('ex').value=0;explode(0);refresh();document.title=M.name+' · 3D Lab'}
+function list(){const U=store().items;$('sel').innerHTML=Object.entries(BUILT).map(([k,n])=>`<option value="${k}">${esc(n)}</option>`).join('')+U.map(u=>`<option value="${esc(u.id)}">${esc(u.name)} (uploaded)</option>`).join('')}
+$('sel').onchange=()=>{location.hash=$('sel').value;open($('sel').value)};
+$('ex').oninput=e=>explode(+e.target.value);$('rst').onclick=reset;
+$('wf').onclick=()=>{wire=!wire;$('wf').classList.toggle('on',wire);if(G)mats(m=>m.wireframe=wire)};
+$('swp').onclick=()=>{sweep=!sweep;t0=performance.now();$('swp').classList.toggle('on',sweep);$('swp').textContent=sweep?'■ Stop sweep':'▶ Auto sweep';if(!sweep)reset()};
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>tab(b.dataset.t));
+$('up').onclick=()=>$('file').click();
+$('file').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;
+ try{const code=await f.text(),m=await mod(code),o=store(),cat=m.category||'Uncategorized',ex=o.items.find(i=>i.name===m.name&&i.cat===cat),it={id:ex?ex.id:'u-'+Date.now().toString(36),name:m.name,cat,sub:m.sub||'',desc:m.info||'',code};
+  if(ex)Object.assign(ex,it);else o.items.push(it);localStorage.setItem(K,JSON.stringify(o));list();$('sel').value=it.id;location.hash=it.id;await open(it.id,code);say('Added "'+m.name+'" to your Models library.')}
+ catch(x){say(f.name+': '+x.message,1)}};
+(function loop(t){requestAnimationFrame(loop);
+ if(sweep&&G){const s=(t-t0)/1000;(M.adjusters||[]).forEach((a,i)=>{if(!a.sweep)return;const v=Math.round(Math.sin(s*(1.1+i*.55))*a.max*.9);V[a.id]=v;const r=$('r_'+a.id);r.value=v;$('v_'+a.id).textContent=v+(a.unit||'')});refresh()}
+ ren.render(scene,cam)})(0);
+fit();place();list();
+const id0=decodeURIComponent(location.hash.slice(1))||'elevon';if(![...$('sel').options].some(o=>o.value===id0)){say('Model "'+id0+'" was not found on this device. Showing the default.',1)}else $('sel').value=id0;
+open($('sel').value);
+</script></body></html>
