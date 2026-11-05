@@ -348,7 +348,9 @@ function lab(id,c,g){const x=O();if(g===0)return(x.wrongMin===x.wrongMax?x.wrong
 
 /* ---------- questions, categories, packs ---------- */
 let Q=[];
-const mk=t=>t.replace(/\bCLmax\b/g,'C<sub>L max</sub>').replace(/\bCL\b/g,'C<sub>L</sub>').replace(/\bCl\b/g,'C<sub>l</sub>').replace(/α0/g,'α<sub>0</sub>').replace(/αi/g,'α<sub>i</sub>');
+const JUNK=/\[span_\d+\]\((?:start|end)_span\)|\[cite(?:_start|_end)?[:\s][^\]]*\]|:contentReference\[[^\]]*\]\{[^}]*\}/g;
+const clean=t=>{t=String(t);const u=t.replace(JUNK,'');return u===t?t:u.replace(/[ \t]{2,}/g,' ').replace(/\s+([.,;:!?])/g,'$1').trim()};
+const mk=t=>clean(t).replace(/\bCLmax\b/g,'C<sub>L max</sub>').replace(/\bCL\b/g,'C<sub>L</sub>').replace(/\bCl\b/g,'C<sub>l</sub>').replace(/α0/g,'α<sub>0</sub>').replace(/αi/g,'α<sub>i</sub>');
 function fnv(x){x=x.trim().toLowerCase().replace(/\s+/g,' ');let h=0xcbf29ce484222325n;const Mk=0xFFFFFFFFFFFFFFFFn;for(const b of new TextEncoder().encode(x))h=((h^BigInt(b))*0x100000001b3n)&Mk;return'h'+h.toString(16).padStart(16,'0').slice(0,12)}
 function meta(s,p){let t=s,n='';
  if(/^Hard/i.test(s))t=s.replace(/^Hard:\s*/i,'');
@@ -366,7 +368,7 @@ function meta(s,p){let t=s,n='';
 function parseRaw(name,text){const cards=[],errs=[];let sec='';
  text.replace(/^\uFEFF/,'').split(/\r?\n/).forEach((line,i)=>{if(!line.trim())return;
   if(line.startsWith('#')){sec=line.replace(/^#+/,'').trim();return}
-  const p=line.replace(/^=/,'').split('|').map(x=>x.trim());
+  const p=line.replace(/^=/,'').split('|').map(x=>clean(x).trim());
   if(p.length!==5){errs.push(`${name}:${i+1}: expected 5 parts, found ${p.length}`);return}
   if(p.some(x=>!x)){errs.push(`${name}:${i+1}: empty part`);return}
   if(!sec){errs.push(`${name}:${i+1}: question before any #Section title`);return}
@@ -394,7 +396,7 @@ function buildTitles(){
 let TREE_READY=false;
 function buildQ(){const ids=new Set(BASE.map(c=>String(c.id)));const all=BASE.slice();
  loadPacks().forEach(pk=>packCards(pk).forEach(c=>{if(!ids.has(String(c.id))){ids.add(String(c.id));all.push(c)}}));
- Q=all.map(c=>Object.assign(c,meta(c.s,c.p)));buildTitles();if(TREE_READY)buildTree()}
+ Q=all.map(c=>{c.q=clean(c.q);c.c=clean(c.c);c.w=c.w.map(clean);return Object.assign(c,meta(c.s,c.p))});buildTitles();if(TREE_READY)buildTree()}
 
 /* ---------- folders: a tree stored in data/folders.json. Folders hold card sets (the #Title groups); sets hold cards ---------- */
 let FT={kids:new Map(),name:new Map(),parent:new Map(),secs:new Map(),secOf:new Map(),virt:new Set()};
