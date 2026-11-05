@@ -30,6 +30,7 @@
   "dir:g:2.4": "aero2",
   "2.5 Theory of Turn": "aero2",
   "tags:2.5 Theory of Turn": "turn, yaw, directional stability",
-  "2.6 Influence of Load Factor": "fmw32lmd02lz"
+  "2.6 Influence of Load Factor": "fmw32lmd02lz",
+  "2.12 Boundary Layer Control Using Vortex Generators, Stall Wedges or Leading Edge Devices": "fmw345lfka9v"
  }
 }
