@@ -275,6 +275,215 @@
     "Removing wings entirely in favor of jet thrust"
    ],
    "at": 1793853720131
+  },
+  {
+   "s": "2.6 Influence of Load Factor",
+   "q": "What is load factor n, and what is its value in straight and level flight?",
+   "c": "Load factor is lift divided by weight (n = L/W); its value is 1 in straight and level flight[span_0](start_span)[span_0](end_span).",
+   "w": [
+    "Load factor is thrust divided by drag; its value is 0",
+    "Load factor is weight divided by wing area; its value equals wing loading",
+    "Load factor is centripetal force multiplied by gravity; its value is 2"
+   ],
+   "at": 1793854417446
+  },
+  {
+   "s": "2.6 Influence of Load Factor",
+   "q": "How is load factor related to bank angle according to the source?",
+   "c": "It varies as the secant of the bank angle (n = sec phi = 1 / cos phi)[span_1](start_span)[span_1](end_span).",
+   "w": [
+    "It varies as the tangent of the bank angle",
+    "It varies as the sine of the bank angle squared",
+    "It remains constant regardless of bank angle"
+   ],
+   "at": 1793854417446
+  },
+  {
+   "s": "2.6 Influence of Load Factor",
+   "q": "What is the load factor in a 60 degree bank turn?",
+   "c": "n = 1 / cos(60 deg) = 1 / 0.5 = 2.0 (the aircraft experiences 2 g)[span_2](start_span)[span_2](end_span).",
+   "w": [
+    "n = 1.0 (no change from level flight)",
+    "n = 1.414 (equal to square root of two)",
+    "n = 4.0 (quadruples due to secant scaling)"
+   ],
+   "at": 1793854417446
+  },
+  {
+   "s": "2.6 Influence of Load Factor",
+   "q": "How is the stalling speed in a maneuver related to the load factor?",
+   "c": "New stalling speed equals basic stalling speed multiplied by the square root of the load factor (V_new = V_s * sqrt(n))[span_3](start_span)[span_3](end_span).",
+   "w": [
+    "New stalling speed equals basic stalling speed multiplied by n cubed",
+    "New stalling speed equals basic stalling speed divided by n",
+    "Stalling speed is completely independent of load factor"
+   ],
+   "at": 1793854417446
+  },
+  {
+   "s": "2.6 Influence of Load Factor",
+   "q": "If a basic stalling speed is 85 knots, what is the stalling speed in a 60 degree bank turn (n = 2)?",
+   "c": "V_new = 85 * sqrt(2) approx 120 knots[span_4](start_span)[span_4](end_span).",
+   "w": [
+    "V_new = 85 * 2 = 170 knots",
+    "V_new = 85 knots (unchanged)",
+    "V_new = 85 / 1.414 = 60 knots"
+   ],
+   "at": 1793854417447
+  },
+  {
+   "s": "2.6 Influence of Load Factor",
+   "q": "What is an accelerated (high-speed) stall in a turn, and what causes it?",
+   "c": "An accelerated stall happens when a high bank angle forces the plane to reach the critical angle of attack at a higher speed due to increased load factor[span_5](start_span)[span_5](end_span).",
+   "w": [
+    "An accelerated stall happens when the engine runs out of fuel at high altitudes",
+    "An accelerated stall is caused by flying below the minimum design speed in straight flight",
+    "An accelerated stall occurs when landing flaps are deployed at supersonic speeds"
+   ],
+   "at": 1793854417447
+  },
+  {
+   "s": "2.6 Influence of Load Factor",
+   "q": "What can happen if one wing stalls before the other during an accelerated stall?",
+   "c": "The aircraft may experience a sudden roll toward the unlifted wing, known as a flicking movement due to unequal lift distribution[span_6](start_span)[span_6](end_span).",
+   "w": [
+    "The aircraft immediately pitches straight up into a vertical climb",
+    "The flight controls lock completely in place",
+    "The engine shuts down automatically to prevent structural failure"
+   ],
+   "at": 1793854417447
+  },
+  {
+   "s": "2.6 Influence of Load Factor",
+   "q": "How is recovery initiated from an accelerated stall?",
+   "c": "By moving the control column forward, decreasing the angle of attack, and thereby unstalling the aircraft[span_7](start_span)[span_7](end_span).",
+   "w": [
+    "By pulling back harder on the stick to regain altitude immediately",
+    "By applying full rudder in the direction of the spin",
+    "By shutting down all electrical systems"
+   ],
+   "at": 1793854417447
+  },
+  {
+   "s": "2.6 Influence of Load Factor",
+   "q": "What does a wing always stall at, and why is an accelerated stall called \"high-speed\"?",
+   "c": "A wing always stalls at the same critical angle of attack, but at a higher speed in a turn because increased G-force raises the stall speed[span_8](start_span)[span_8](end_span).",
+   "w": [
+    "It stalls at a higher angle of attack only when flying above 300 knots",
+    "It is called high-speed because the engine is pushed to maximum RPM",
+    "It is called high-speed because air density drops rapidly"
+   ],
+   "at": 1793854417448
+  },
+  {
+   "s": "2.6 Influence of Load Factor",
+   "q": "What practical factors limit the minimum radius of a turn?",
+   "c": "Maximum permitted load factor (G-limit), maximum lift before reaching the stall, airspeed, and available engine performance.",
+   "w": [
+    "The amount of fuel remaining in the wing tanks only",
+    "The length of the runway used for takeoff",
+    "The color scheme and paint weight of the aircraft airframe"
+   ],
+   "at": 1793854417448
+  },
+  {
+   "s": "2.6 Influence of Load Factor",
+   "q": "If an aircraft reaches its maximum permitted G-load, can it keep increasing its turning force indefinitely?",
+   "c": "B. No (turning force is restricted by structural G-limits and stall boundaries).",
+   "w": [
+    "A. Yes, G-limits can be exceeded safely without structural damage",
+    "A. Yes, engine thrust compensates for all structural load limits",
+    "B. No, because gravity turns off during high-G maneuvers"
+   ],
+   "at": 1793854417448
+  },
+  {
+   "s": "2.6 Influence of Load Factor",
+   "q": "What determines maximum rate of turn?",
+   "c": "Airspeed, how much turning force the aircraft can produce, and balancing turning performance against stall and structural limits.",
+   "w": [
+    "The total weight of the pilot and baggage capacity",
+    "The number of engines mounted on the fuselage",
+    "The geographical latitude of the flight path"
+   ],
+   "at": 1793854417448
+  },
+  {
+   "s": "2.6 Influence of Load Factor",
+   "q": "What is corner speed in aircraft performance?",
+   "c": "Corner speed is approximately the speed at which the aircraft can reach its maximum permitted load factor without exceeding its stall limit (maximum turning performance without stalling).",
+   "w": [
+    "Corner speed is the maximum safe speed for lowering landing gear",
+    "Corner speed is the speed where induced drag drops completely to zero",
+    "Corner speed is the minimum speed required to start the engine"
+   ],
+   "at": 1793854417448
+  },
+  {
+   "s": "2.6 Influence of Load Factor",
+   "q": "What governs the minimum radius of a turn according to the equations in the text?",
+   "c": "The minimum radius is set by speed squared and the maximum lift coefficient (r = (V^2 / g) * (C_Lmax / C_L)), with engine power as the final deciding factor[span_9](start_span)[span_9](end_span)[span_10](start_span)[span_10](end_span).",
+   "w": [
+    "The minimum radius is determined entirely by aircraft weight and fuel capacity",
+    "The minimum radius depends strictly on propeller pitch and rudder deflection",
+    "The minimum radius is fixed at 500 feet for all aircraft types"
+   ],
+   "at": 1793854417449
+  },
+  {
+   "s": "2.6 Influence of Load Factor",
+   "q": "What is the difference between a minimum radius turn and a maximum rate turn?",
+   "c": "A minimum radius turn gives the smallest physical circle, while a maximum rate turn gives the shortest time to change heading (highest angular velocity)[span_11](start_span)[span_11](end_span)[span_12](start_span)[span_12](end_span).",
+   "w": [
+    "A minimum radius turn uses zero engine power, while maximum rate uses full power",
+    "A minimum radius turn is performed upside down, while maximum rate is level",
+    "There is no difference between the two terms in aerodynamics"
+   ],
+   "at": 1793854417449
+  },
+  {
+   "s": "2.6 Influence of Load Factor",
+   "q": "What three conditions provide a maximum-rate turn?",
+   "c": "Fly at the stalling speed, fly at the maximum load factor, and fly in air that is as dense as possible[span_13](start_span)[span_13](end_span).",
+   "w": [
+    "Fly at maximum speed, minimum load factor, and at maximum service ceiling altitude",
+    "Fly with full flaps, zero engine power, and a 90-degree bank angle",
+    "Fly straight and level without banking while accelerating rapidly"
+   ],
+   "at": 1793854417449
+  },
+  {
+   "s": "2.6 Influence of Load Factor",
+   "q": "Why does a climbing turn tend towards an over-bank, and what must the pilot do?",
+   "c": "The outer wing travels a greater distance and moves faster, generating more lift and increasing the bank angle; the pilot must hold bank off using opposite aileron[span_14](start_span)[span_14](end_span)[span_15](start_span)[span_15](end_span).",
+   "w": [
+    "The inner wing generates more lift because it moves slower, pulling the nose down; the pilot must pull back harder",
+    "The tailplane stalls from excess downwash, forcing a level recovery",
+    "Gravity pulls the heavy side down, requiring full rudder application"
+   ],
+   "at": 1793854417449
+  },
+  {
+   "s": "2.6 Influence of Load Factor",
+   "q": "What is the effect on the outer wing vs inner wing in a descending turn?",
+   "c": "In a descending turn the inner wing has the greater angle of attack, and the bank must be held on by the pilot[span_16](start_span)[span_16](end_span).",
+   "w": [
+    "The outer wing completely loses all lift instantly",
+    "Both wings experience zero angle of attack due to downward momentum",
+    "The aircraft enters an immediate unrecoverable spin toward the outer wing"
+   ],
+   "at": 1793854417450
+  },
+  {
+   "s": "2.6 Influence of Load Factor",
+   "q": "What is a pull-out maneuver, and what sequence of events occurs when a pilot pulls back on the control column during a descent?",
+   "c": "When the pilot pulls back, the elevator deflects upward, raising the nose, increasing the wing's angle of attack and lift, which curves the flight path upward to transition the aircraft from descending to level flight.",
+   "w": [
+    "When the pilot pulls back, the spoilers deploy, the nose drops, and the aircraft dives steeper",
+    "When the pilot pulls back, engine thrust cuts off, airspeed drops, and the aircraft enters a flat spin",
+    "When the pilot pulls back, the flaps retract automatically, causing a sudden loss of altitude"
+   ],
+   "at": 1793854417450
   }
  ]
 }
