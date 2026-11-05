@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,viewport-fit=cover">
 <title>Flight Recall</title>
 <meta name="theme-color" content="#CF5F27">
 <link rel="manifest" href="manifest.webmanifest">
@@ -179,6 +179,11 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
 .sres{margin:0 0 12px}.sres .frow{min-height:48px;margin:5px 0}
 .sh{font-size:.78rem;color:var(--mute);text-transform:uppercase;letter-spacing:.05em;margin:10px 2px 4px}
 .addm input[type=text]{margin-bottom:2px}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}html,body{max-width:100%;overflow-x:hidden}
+img,svg,input,select,textarea{max-width:100%}.set input[type=password],.set input[type=text],.set select{box-sizing:border-box}
+.sheet .sc,.sheet .in{overflow-x:hidden;max-width:100%}.sheet .in{width:100%;box-sizing:border-box}
+.card,.q,.opt,.opt span,.rq,.rh,.tx,.tx b,.tx small,.info,.crumbs,.frow,.res{min-width:0;max-width:100%;overflow-wrap:anywhere}
+.frow{box-sizing:border-box}.crumbs button{max-width:100%;overflow-wrap:anywhere;text-align:left}
 </style></head><body>
 <div class="wrap">
 <div class="top"><h1><svg viewBox="0 0 24 24" width="22" height="22"><path d="M2 12 22 3l-5 18-5-7z" fill="currentColor"/></svg>Flight Recall</h1>
