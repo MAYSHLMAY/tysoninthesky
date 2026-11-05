@@ -1,1 +1,280 @@
-{"v":1,"cards":[]}
+{
+ "v": 1,
+ "cards": [
+  {
+   "s": "2.5 Theory of Turn",
+   "q": "What is centripetal force?",
+   "c": "A centre-seeking force needed for any curved path, acting along the radius towards the centre.",
+   "w": [
+    "A centrifugal force pushing the object outward",
+    "A linear force acting forward along the flight path",
+    "A gravitational force pulling the aircraft downward"
+   ],
+   "at": 1793853720129
+  },
+  {
+   "s": "2.5 Theory of Turn",
+   "q": "For an aircraft in a turn, what is the centripetal force also called?",
+   "c": "The horizontal component of lift.",
+   "w": [
+    "The vertical component of weight",
+    "The total engine thrust vector",
+    "The induced drag component"
+   ],
+   "at": 1793853720129
+  },
+  {
+   "s": "2.5 Theory of Turn",
+   "q": "What does the third law of motion say about centripetal force, according to the source?",
+   "c": "It is opposed by an equal and opposite force called the centrifugal force (a centre-fleeing force).",
+   "w": [
+    "It creates an infinite acceleration toward the center",
+    "It eliminates all aerodynamic drag on the airframe",
+    "It converts gravitational energy directly into kinetic energy"
+   ],
+   "at": 1793853720129
+  },
+  {
+   "s": "2.5 Theory of Turn",
+   "q": "What happens to an object on a string if the string is released? Which law explains it?",
+   "c": "The object flies off in a straight line at a tangent; explained by Newton's first law of motion.",
+   "w": [
+    "The object flies straight outward along the radius; explained by Newton's second law",
+    "The object stops instantly; explained by Newton's third law",
+    "The object spirals downward; explained by gravity"
+   ],
+   "at": 1793853720129
+  },
+  {
+   "s": "2.5 Theory of Turn",
+   "q": "Does the released object fly outwards along the radius? Explain.",
+   "c": "No, the object goes off straight along the tangent (touching the circle at one point), not radially outwards.",
+   "w": [
+    "Yes, centrifugal force throws it straight out along the radius",
+    "Yes, because the string's tension pushes it outward upon release",
+    "No, it falls straight down to the center of the earth"
+   ],
+   "at": 1793853720129
+  },
+  {
+   "s": "2.5 Theory of Turn",
+   "q": "Can any object, car or aircraft, turn without centripetal force?",
+   "c": "No, without centripetal force, no object can be made to turn.",
+   "w": [
+    "Yes, cars can turn using engine power alone without any sideways force",
+    "Yes, aircraft turn purely through gravity without centripetal force",
+    "Yes, momentum automatically curves any path without forces"
+   ],
+   "at": 1793853720129
+  },
+  {
+   "s": "2.5 Theory of Turn",
+   "q": "On what three things does centripetal force depend, and how?",
+   "c": "Directly proportional to the mass (or weight) of the body, directly proportional to the square of its speed, and inversely proportional to the radius of the turn.",
+   "w": [
+    "Directly to speed, inversely to mass, and independent of radius",
+    "Directly to radius and mass, inversely to speed cubed",
+    "Independent of mass, directly to radius squared"
+   ],
+   "at": 1793853720129
+  },
+  {
+   "s": "2.5 Theory of Turn",
+   "q": "Write the centripetal-force formula in lb and in newtons.",
+   "c": "Centripetal force = (W * V^2) / (g * r) in lb, or (m * v^2) / r in newtons.",
+   "w": [
+    "Centripetal force = (W * r) / V^2 in lb",
+    "Centripetal force = (m * g * r) / V in newtons",
+    "Centripetal force = W * V * r in lb"
+   ],
+   "at": 1793853720129
+  },
+  {
+   "s": "2.5 Theory of Turn",
+   "q": "What does each symbol W, V^2, r, g mean? Give both unit systems for g.",
+   "c": "W = weight (or m = mass); V^2 = square of TAS; r = radius of turn; g = gravitational acceleration (9.81 m/s^2 or 32.2 ft/s^2).",
+   "w": [
+    "W = wind speed; V^2 = volume squared; r = rate; g = gear ratio",
+    "W = wing loading; V^2 = velocity; r = roll rate; g = gravity constant (10 m/s^2)",
+    "W = watts; V^2 = voltage; r = resistance; g = ground speed"
+   ],
+   "at": 1793853720130
+  },
+  {
+   "s": "2.5 Theory of Turn",
+   "q": "Give the formula for acceleration towards the centre.",
+   "c": "Acceleration = V^2 / r.",
+   "w": [
+    "Acceleration = r / V^2",
+    "Acceleration = g * r * V",
+    "Acceleration = V / (g * r)"
+   ],
+   "at": 1793853720130
+  },
+  {
+   "s": "2.5 Theory of Turn",
+   "q": "Find the centripetal force for W = 3220 lb, V = 100 ft/s, r = 1000 ft, g = 32.2 ft/s^2.",
+   "c": "F = (3220 * 100^2) / (32.2 * 1000) = 1000 lb.",
+   "w": [
+    "F = (3220 * 100) / 1000 = 322 lb",
+    "F = 32,200 lb",
+    "F = 100 lb"
+   ],
+   "at": 1793853720130
+  },
+  {
+   "s": "2.5 Theory of Turn",
+   "q": "Find the centripetal force in newtons for m = 1000 kg, V = 50 m/s, r = 300 m.",
+   "c": "F = (1000 * 50^2) / 300 = 8333.33 newtons.",
+   "w": [
+    "F = (1000 * 50) / 300 = 166.6 newtons",
+    "F = 50,000 newtons",
+    "F = 15,000 newtons"
+   ],
+   "at": 1793853720130
+  },
+  {
+   "s": "2.5 Theory of Turn",
+   "q": "What happens to the centripetal force if the speed is doubled and the radius is unchanged?",
+   "c": "It increases by a factor of four (doubling speed needs four times the force because speed is squared).",
+   "w": [
+    "It doubles because force is directly proportional to speed",
+    "It remains completely unchanged",
+    "It halves because speed and force are inversely related"
+   ],
+   "at": 1793853720130
+  },
+  {
+   "s": "2.5 Theory of Turn",
+   "q": "Find the acceleration towards the centre if V = 60 m/s and r = 360 m.",
+   "c": "Acceleration = 60^2 / 360 = 3600 / 360 = 10 m/s^2.",
+   "w": [
+    "Acceleration = 60 / 360 = 0.16 m/s^2",
+    "Acceleration = 360 / 60 = 6 m/s^2",
+    "Acceleration = 60 * 360 = 21,600 m/s^2"
+   ],
+   "at": 1793853720130
+  },
+  {
+   "s": "2.5 Theory of Turn",
+   "q": "How is the centripetal force of an aircraft derived?",
+   "c": "By resolving the inclined total lift force into a vertical lift component and a horizontal lift component.",
+   "w": [
+    "By increasing engine thrust to push the aircraft sideways",
+    "By deflecting the rudder to push tail air outward",
+    "By shifting fuel weight from wing to wing"
+   ],
+   "at": 1793853720130
+  },
+  {
+   "s": "2.5 Theory of Turn",
+   "q": "In Figure 2.22, name the three arrows (other than weight) and how they are related.",
+   "c": "Total lift, vertical lift component, and centripetal force (horizontal lift component); total lift is the vector sum of the two components.",
+   "w": [
+    "Thrust, drag, and lift; they sum to zero",
+    "Lift, side force, and centrifugal force; they balance weight",
+    "Centripetal force, centrifugal force, and gravity; they form a closed loop"
+   ],
+   "at": 1793853720131
+  },
+  {
+   "s": "2.5 Theory of Turn",
+   "q": "What is the \"double role\" of lift in a turn?",
+   "c": "It must provide the horizontal component to create centripetal force and a vertical component large enough to maintain constant height.",
+   "w": [
+    "It must accelerate the aircraft forward while simultaneously slowing it down",
+    "It must generate cabin pressurization and control surface response",
+    "It must balance both weight and engine torque simultaneously"
+   ],
+   "at": 1793853720131
+  },
+  {
+   "s": "2.5 Theory of Turn",
+   "q": "Why does the aircraft tend to descend if the angle of attack is not increased in a turn?",
+   "c": "Because tilting the total lift vector sideways reduces the vertical lift component below the aircraft's weight.",
+   "w": [
+    "Because banking increases aircraft weight instantly",
+    "Because turning turns off the engine automatically",
+    "Because horizontal lift pulls the aircraft downward toward the earth"
+   ],
+   "at": 1793853720131
+  },
+  {
+   "s": "2.5 Theory of Turn",
+   "q": "What must the pilot do to the angle of attack in a level turn, and what is the consequence for drag and power?",
+   "c": "The pilot must increase the angle of attack; this causes a surge in induced drag, which requires more engine power to keep speed constant.",
+   "w": [
+    "The pilot must decrease the angle of attack; drag drops and speed increases",
+    "The pilot must keep angle of attack constant; power remains unchanged",
+    "The pilot must shut down the engine to prevent overspeeding"
+   ],
+   "at": 1793853720131
+  },
+  {
+   "s": "2.5 Theory of Turn",
+   "q": "What is a steep turn?",
+   "c": "A turn having an angle of bank in excess of 45 degrees.",
+   "w": [
+    "Any turn executed above 10,000 feet altitude",
+    "A turn where the aircraft banks vertically at 90 degrees",
+    "A turn performed with the engine at idle power"
+   ],
+   "at": 1793853720131
+  },
+  {
+   "s": "2.5 Theory of Turn",
+   "q": "Why do larger bank angles need a larger angle of attack?",
+   "c": "Because steeper banks tilt more lift sideways, requiring a larger total-lift increment (higher angle of attack) to keep the vertical lift equal to weight.",
+   "w": [
+    "Because higher bank angles make the wings heavier",
+    "Because speed automatically drops to zero in a steep bank",
+    "Because gravity pulls the tail down during a bank"
+   ],
+   "at": 1793853720131
+  },
+  {
+   "s": "2.5 Theory of Turn",
+   "q": "What happens as the aircraft in a steep turn reaches a very low speed?",
+   "c": "The angle of attack and induced drag become so high that full power is usually necessary, risking an acceleration stall.",
+   "w": [
+    "The aircraft magically gains altitude without power",
+    "The wings fold automatically due to excess G-force",
+    "The flight controls lock completely"
+   ],
+   "at": 1793853720131
+  },
+  {
+   "s": "2.5 Theory of Turn",
+   "q": "What does Figure 2.23 show about the lift required in a steep turn compared with Figure 2.22?",
+   "c": "A much longer, more tilted total-lift arrow is shown to account for the steeper bank angle.",
+   "w": [
+    "A shorter, flatter lift vector because less lift is needed at high bank angles",
+    "No change in lift magnitude, only a change in engine thrust",
+    "An inverted lift vector pointing toward the ground"
+   ],
+   "at": 1793853720131
+  },
+  {
+   "s": "2.5 Theory of Turn",
+   "q": "Define wing loading, what does it affect?",
+   "c": "Wing loading is the weight of the aircraft divided by the wing area; it affects both the maximum and minimum stalling speeds.",
+   "w": [
+    "Wing loading is wing area divided by weight; it affects only engine fuel consumption",
+    "Wing loading is total lift minus drag; it affects only cruise altitude",
+    "Wing loading is engine power divided by mass; it affects climb rate only"
+   ],
+   "at": 1793853720131
+  },
+  {
+   "s": "2.5 Theory of Turn",
+   "q": "What is the modern tendency regarding wing loading and landing speeds?",
+   "c": "Higher wing loading (smaller area, higher speed), using movable flaps to cut landing speeds.",
+   "w": [
+    "Lower wing loading (larger area, lower speed) with no flaps allowed",
+    "Constant wing loading across all aircraft types regardless of size",
+    "Removing wings entirely in favor of jet thrust"
+   ],
+   "at": 1793853720131
+  }
+ ]
+}
