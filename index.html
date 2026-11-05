@@ -165,6 +165,20 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
 .tabs2{display:flex;gap:6px;margin:4px 0 6px}.tabs2 button{flex:1;padding:9px;border-radius:11px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-weight:600;cursor:pointer}.tabs2 button.on{background:var(--acc);border-color:var(--acc);color:#fff}
 .addm textarea{width:100%;min-height:130px;box-sizing:border-box;font:inherit;padding:9px;border-radius:10px;border:1.5px solid var(--line);background:var(--card);color:var(--ink)}
 .addm [hidden]{display:none!important}
+.ico[disabled]{opacity:.28;pointer-events:none}
+#mbody{animation-duration:.18s;animation-timing-function:ease-out}
+#mbody.sl{animation-name:slL}#mbody.sr{animation-name:slR}
+@keyframes slL{from{opacity:.2;transform:translateX(26px)}to{opacity:1;transform:none}}
+@keyframes slR{from{opacity:.2;transform:translateX(-26px)}to{opacity:1;transform:none}}
+.pathbar{display:flex;gap:6px;margin:0 0 10px}
+.pathbar input{flex:1;min-width:0;font:inherit;padding:10px 11px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);color:var(--ink)}
+.pathbar button{border:0;border-radius:12px;background:var(--acc);color:#fff;font:inherit;font-weight:700;padding:0 16px;cursor:pointer}
+.frow{min-height:58px;-webkit-tap-highlight-color:transparent;touch-action:manipulation}.frow:active{transform:scale(.99);background:var(--accbg)}
+.tg{display:inline-block;background:var(--accbg);color:var(--acc);border-radius:20px;padding:1px 8px;margin:3px 4px 0 0;font-size:.74rem}
+.rpath{display:block;color:var(--mute);font-size:.74rem;margin:2px 0 0}
+.sres{margin:0 0 12px}.sres .frow{min-height:48px;margin:5px 0}
+.sh{font-size:.78rem;color:var(--mute);text-transform:uppercase;letter-spacing:.05em;margin:10px 2px 4px}
+.addm input[type=text]{margin-bottom:2px}
 </style></head><body>
 <div class="wrap">
 <div class="top"><h1><svg viewBox="0 0 24 24" width="22" height="22"><path d="M2 12 22 3l-5 18-5-7z" fill="currentColor"/></svg>Flight Recall</h1>
@@ -180,10 +194,10 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
 </div>
 <div id="toast"></div>
 
-<dialog id="menu" class="sheet"><div class="in"><header><h3>Library</h3><button class="ico" data-close aria-label="Close">✕</button></header><div class="sc" id="mbody"></div></div></dialog>
+<dialog id="menu" class="sheet"><div class="in"><header><span style="display:flex;gap:2px;align-items:center"><button class="ico" id="mback" aria-label="Back" title="Back">←</button><button class="ico" id="mfwd" aria-label="Forward" title="Forward">→</button><button class="ico" id="mup" aria-label="Up one folder" title="Up one folder">↑</button><h3 style="margin-left:6px">Library</h3></span><button class="ico" data-close aria-label="Close">✕</button></header><div class="sc" id="mbody"></div></div></dialog>
 
 <dialog id="browse" class="sheet"><div class="in"><header><h3>Search questions</h3><button class="ico" data-close aria-label="Close">✕</button></header>
-<div class="sbar"><input id="qin" type="search" placeholder="Search a word, an answer, or a number like 2.1.2.6" autocomplete="off"></div>
+<div class="sbar"><input id="qin" type="search" placeholder="Search questions, folders, or #tags" autocomplete="off"></div>
 <div class="chips" id="bf"></div><div class="sc" id="bres"></div></div></dialog>
 
 <dialog id="stats" class="sheet"><div class="in"><header><h3>Statistics</h3><button class="ico" data-close aria-label="Close">✕</button></header><div class="sc" id="stbody"></div></div></dialog>
@@ -213,9 +227,9 @@ button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid 
 <div id="addBox" hidden>
 <div class="tabs2"><button type="button" id="tF" class="on">New folder</button><button type="button" id="tC">Add cards</button></div>
 <label>Where</label><select id="whr"></select>
-<div id="paneF"><label>Folder name</label><input type="text" id="fname" placeholder="e.g. Aerodynamics" maxlength="60"><div class="row"><button class="solid" id="mkf" type="button">Create folder</button></div></div>
+<div id="paneF"><label>Folder name, or a path like <b>Materials/Chapter 1</b> (missing folders are created automatically)</label><input type="text" id="fname" placeholder="e.g. Materials/Chapter 1" maxlength="120" autocomplete="off"><div class="row"><button class="solid" id="mkf" type="button">Create folder</button></div></div>
 <div id="paneC" hidden><p class="n">Paste text: a <b>#2.5 Title</b> line, then one question per line as <b>question|correct|wrong1|wrong2|wrong3</b>. Cards are always added, never replaced. Each <b>#Title</b> becomes a card set inside the folder you picked.</p>
-<input type="file" id="fil" accept=".txt,text/plain" multiple>
+<label>Extra sub-folders (optional), like <b>Chapter 2/Part A</b></label><input type="text" id="cpath" placeholder="Created inside the folder above" maxlength="120" autocomplete="off"><label>Tags (optional, comma separated)</label><input type="text" id="ctags" placeholder="e.g. lift, forces, exam" maxlength="120" autocomplete="off"><input type="file" id="fil" accept=".txt,text/plain" multiple style="margin-top:10px">
 <textarea id="paste" placeholder="#2.5 Theory of Turn&#10;question|correct|wrong1|wrong2|wrong3"></textarea>
 <div class="row"><button class="solid" id="addp" type="button">Add cards</button></div></div>
 <div id="imsg"></div><div id="packs"></div>
@@ -389,7 +403,8 @@ function buildTree(){
  const secs=new Map(); /* folder id -> Set of all sections inside it, including sub-folders */
  const all=id=>{if(secs.has(id))return secs.get(id);const st=new Set(direct.get(id)||[]);secs.set(id,st);(kids.get(id)||[]).forEach(k=>all(k).forEach(x=>st.add(x)));return st};
  name.forEach((_,id)=>all(id));
- FT={kids,name,parent,secs,secOf,virt,direct,secInfo};
+ const tags=new Map();Object.keys(place).forEach(k=>{if(k.startsWith('tags:')){const a=String(place[k]).split(',').map(x=>x.trim().replace(/^#/,'')).filter(Boolean);if(a.length)tags.set(k.slice(5),a)}});
+ FT={kids,name,parent,secs,secOf,virt,direct,secInfo,tags};
  /* hide empty virtual folders */
  virt.forEach(id=>{if(!all(id).size&&!(kids.get(id)||[]).length){const p=kids.get('root');if(p){const i=p.indexOf(id);if(i>=0)p.splice(i,1)}}})}
 function isDesc2(par,id,start){let c=start,n=0;while(c&&n++<30){if(c===id)return true;c=par.get(c)}return false}
@@ -585,7 +600,18 @@ function showInfo(id){const q=Q.find(z=>String(z.id)===String(id));$('ibody').in
 
 /* ---------- study menu ---------- */
 const gOrder=(a,b)=>{const rk=k=>/^\d/.test(k)?0:k==='other'?1:k==='hard'?2:3;if(rk(a)!==rk(b))return rk(a)-rk(b);return a.localeCompare(b,undefined,{numeric:true})};
-let BR='root';
+let BR='root',BH=[],BW=[],menuHist=false,popFlag=false;
+const secPath=s=>fpath(FT.secOf.get(s)||'root');
+function resolvePath(start,segs){let cur=start;const plan=[];for(const sg of segs){let hit=null;if(!plan.length){hit=(FT.kids.get(cur)||[]).find(k=>(FT.name.get(k)||'').toLowerCase()===sg.toLowerCase())}
+  if(hit){cur=hit;continue}const id=newId();plan.push({id,name:sg,parent:cur});cur=id}return{id:cur,plan}}
+const splitPath=t=>String(t||'').split('/').map(x=>x.trim()).filter(Boolean);
+async function ensurePath(start,txt){const segs=splitPath(txt);if(!segs.length)return{id:start,msg:''};const r=resolvePath(start,segs);let msg='';
+ if(r.plan.length)msg=await foldOp(db=>{r.plan.forEach(f=>db.folders.push(f))},{create:true});return{id:r.id,msg,created:r.plan.length}}
+function navTo(id){if(id===BR||!FT.name.has(id))return;BH.push(BR);BW=[];BR=id;renderMenu(1)}
+function navBack(){if(!BH.length)return false;BW.push(BR);BR=BH.pop();if(!FT.name.has(BR))BR='root';renderMenu(-1);return true}
+function navFwd(){if(!BW.length)return;BH.push(BR);BR=BW.pop();if(!FT.name.has(BR))BR='root';renderMenu(1)}
+function navUp(){if(BR==='root')return;navTo(FT.parent.get(BR)||'root')}
+
 async function ask(o){await new Promise(r=>setTimeout(r,70));return new Promise(res=>{const d=$('fact');let done=false;const inp='width:100%;box-sizing:border-box;font:inherit;padding:9px 10px;border-radius:10px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);margin-top:8px';
  $('fbody').innerHTML=`<h3 style="margin:0 0 6px">${esc(o.title)}</h3>${o.msg?`<p class="n">${esc(o.msg)}</p>`:''}${o.text!=null?`<input type="text" id="fx" value="${attr(o.text)}" maxlength="60" style="${inp}">`:''}${o.sel?`<select id="fs" style="${inp}">${o.sel.map(x=>`<option value="${attr(x.id)}"${x.id===o.selv?' selected':''}>${esc(x.label)}</option>`).join('')}</select>`:''}${o.acts?o.acts.map(a=>`<button class="ghost wide" data-act="${a.k}" style="margin-top:8px;width:100%">${esc(a.l)}</button>`).join(''):''}<div class="row" style="margin-top:12px"><button class="ghost" id="fno" type="button">Cancel</button>${o.acts?'':`<button class="solid" id="fok" type="button">${o.ok||'OK'}</button>`}</div>`;
  const fin=v=>{if(done)return;done=true;d.onclose=null;if(d.open)d.close();res(v)};
@@ -595,8 +621,8 @@ async function ask(o){await new Promise(r=>setTimeout(r,70));return new Promise(
 function menuStats(){const now=Date.now(),lim=addDays(dayStart(now),1),U=new Map();
  Q.forEach(q=>{const c=S.cards[q.id];let u=U.get(q.s);if(!u){u={c:0,d:0,m:0};U.set(q.s,u)}u.c++;
   if(c){if(!c.susp&&(isLrn(c)?c.due<=now:c.t==='review'&&c.due<lim))u.d++;if(c.t==='review'&&c.iv>=21)u.m++}});return U}
-function openMenu(){const v=S.sec;if(v.startsWith('f:')&&FT.name.has(v.slice(2)))BR=v.slice(2);else if(FT.secOf.has(v))BR=FT.secOf.get(v);if(!FT.name.has(BR))BR='root';renderMenu();$('menu').showModal();const on=$('mbody').querySelector('.frow.on');if(on)on.scrollIntoView({block:'center'})}
-function renderMenu(){
+function openMenu(keep){const v=S.sec;if(!keep){if(v.startsWith('f:')&&FT.name.has(v.slice(2)))BR=v.slice(2);else if(FT.secOf.has(v))BR=FT.secOf.get(v)}if(!FT.name.has(BR))BR='root';BH=[];BW=[];renderMenu();$('menu').showModal();try{history.pushState({frm:1},'');menuHist=true}catch(e){}const on=$('mbody').querySelector('.frow.on');if(on)on.scrollIntoView({block:'center'})}
+function renderMenu(dir){
  const U=menuStats(),own=isOwner(),cnt={weak:0,marked:0,leech:0};
  Q.forEach(q=>{const c=S.cards[q.id];if(c){if(inSel(q,'weak',c))cnt.weak++;if(c.mark)cnt.marked++;if(isLeech(c))cnt.leech++}});
  const sum=id=>{let c=0,d=0,m=0;(FT.secs.get(id)||new Set()).forEach(s=>{const u=U.get(s);if(u){c+=u.c;d+=u.d;m+=u.m}});return{c,d,m}};
@@ -610,21 +636,33 @@ function renderMenu(){
  kids.forEach(id=>{const s=sum(id),nk=(FT.kids.get(id)||[]).length,ns=(FT.direct.get(id)||[]).length;
   h+=`<div class="frow${S.sec==='f:'+id?' on':''}" role="button" tabindex="0" data-open="${attr(id)}"><span class="ic">📁</span><span class="tx"><b>${esc(FT.name.get(id)||'?')}</b><small>${nk?nk+' folder'+(nk>1?'s':'')+' · ':''}${ns?ns+' set'+(ns>1?'s':'')+' · ':''}${s.c} cards${s.d?' · <span style="color:var(--warm)">'+s.d+' due</span>':''}</small></span><button class="go" data-study="${attr(id)}">Study</button>${own?`<button class="go mgr" data-fm="${attr(id)}" aria-label="Folder options">⋯</button>`:''}</div>`});
  secs.forEach(s=>{const u=U.get(s)||{c:0,d:0},inf=FT.secInfo.get(s)||{t:s,n:''};
-  h+=`<div class="frow${S.sec===s?' on':''}" role="button" tabindex="0" data-v="${attr(s)}"><span class="ic">📄</span><span class="tx"><b>${esc((inf.n?inf.n+' · ':'')+inf.t)}</b><small>${u.c} cards${u.d?' · <span style="color:var(--warm)">'+u.d+' due</span>':''}</small></span>${own?`<button class="go mgr" data-sm="${attr(s)}" aria-label="Set options">⋯</button>`:''}</div>`});
+  h+=`<div class="frow${S.sec===s?' on':''}" role="button" tabindex="0" data-v="${attr(s)}"><span class="ic">📄</span><span class="tx"><b>${esc((inf.n?inf.n+' · ':'')+inf.t)}</b><small>${u.c} cards${u.d?' · <span style="color:var(--warm)">'+u.d+' due</span>':''}</small>${(FT.tags.get(s)||[]).map(t=>`<span class="tg">#${esc(t)}</span>`).join('')}</span>${own?`<button class="go mgr" data-sm="${attr(s)}" aria-label="Set options">⋯</button>`:''}</div>`});
  if(!kids.length&&!secs.length)h+='<p class="empty">This folder is empty.<br>Use the + button on the main screen to add a folder or cards here.</p>';
+ h=h.replace('</div>\n<div class="crumbs">','</div>\n<div class="crumbs">');
  $('mbody').innerHTML=h;
- const B=$('mbody');
+ const B=$('mbody');B.classList.remove('sl','sr');void B.offsetWidth;if(dir)B.classList.add(dir>0?'sl':'sr');
+ $('mback').disabled=!BH.length;$('mfwd').disabled=!BW.length;$('mup').disabled=BR==='root';
+ const cr=B.querySelector('.crumbs');if(cr){const pb=document.createElement('div');pb.className='pathbar';pb.innerHTML='<input type="text" id="gop" list="paths" placeholder="Go to or create a path: Materials/Chapter 1" autocomplete="off" autocapitalize="off" spellcheck="false"><button id="gob" type="button">Go</button><datalist id="paths"></datalist>';cr.after(pb);
+  const paths=[];const walk=(id,pre)=>{(FT.kids.get(id)||[]).forEach(k=>{const pt=pre+(FT.name.get(k)||'?');paths.push(pt);walk(k,pt+'/')})};walk('root','');
+  $('paths').innerHTML=paths.map(x=>`<option value="${attr(x)}">`).join('');
+  const go=async()=>{const t=$('gop').value.trim();if(!t)return;const rel=t.startsWith('./'),segs=splitPath(rel?t.slice(2):t),r=resolvePath(rel?BR:'root',segs);
+   if(!r.plan.length){navTo(r.id);return}
+   if(!isOwner()){toast('No such folder. Tap + and unlock to create folders.');return}
+   const x=await ensurePath(rel?BR:'root',rel?t.slice(2):t);toast(x.msg||('Created '+segs.join(' / ')));navTo(x.id)};
+  $('gob').onclick=go;$('gop').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();go()}}}
  B.querySelectorAll('[data-v]').forEach(b=>b.onclick=e=>{if(e.target.closest('[data-sm]'))return;S.sec=b.dataset.v;later={};last=null;cram=false;ahead=0;save();$('menu').close();show()});
- B.querySelectorAll('[data-open]').forEach(b=>b.onclick=e=>{if(e.target.closest('[data-study],[data-fm]'))return;BR=b.dataset.open;renderMenu();B.scrollTop=0;$('mbody').parentNode.scrollTop=0});
+ B.querySelectorAll('[data-open]').forEach(b=>b.onclick=e=>{if(e.target.closest('[data-study],[data-fm]'))return;navTo(b.dataset.open);$('mbody').scrollTop=0});
  B.querySelectorAll('[data-study]').forEach(b=>b.onclick=e=>{e.stopPropagation();S.sec='f:'+b.dataset.study;later={};last=null;cram=false;ahead=0;save();$('menu').close();show()});
  B.querySelectorAll('[data-fm]').forEach(b=>b.onclick=async e=>{e.stopPropagation();const id=b.dataset.fm,nm=FT.name.get(id),V=FT.virt.has(id);
   const r=await ask({title:'📁 '+nm,acts:[{k:'ren',l:'Rename'},{k:'mov',l:'Move to another folder'}].concat(V?[]:[{k:'del',l:'Delete folder (keeps its contents)'}])});if(!r)return;
   if(r.act==='ren'){const x=await ask({title:'Rename folder',text:nm,ok:'Save'});if(x&&x.text){toast(await foldOp(db=>{if(V){db.place['name:'+id]=x.text;return}const f=db.folders.find(z=>z.id===id);if(!f)return 0;f.name=x.text})||'Renamed')}}
   else if(r.act==='mov'){const x=await ask({title:'Move “'+nm+'” to',sel:foldList(id),selv:FT.parent.get(id)||'root',ok:'Move'});if(x&&x.sel&&x.sel!==id){toast(await foldOp(db=>{if(V){db.place['dir:'+id]=x.sel;return}const f=db.folders.find(z=>z.id===id);if(!f)return 0;f.parent=x.sel})||'Moved')}}
   else if(r.act==='del'){const x=await ask({title:'Delete “'+nm+'”?',msg:'Its sub-folders and card sets move up one level. No cards are deleted.',ok:'Delete'});if(x){const up=FT.parent.get(id)||'root';if(BR===id)BR=up;if(S.sec==='f:'+id){S.sec='all';save()}
-   toast(await foldOp(db=>{const i=db.folders.findIndex(z=>z.id===id);if(i<0)return 0;db.folders.splice(i,1);db.folders.forEach(f=>{if(f.parent===id)f.parent=up});Object.keys(db.place).forEach(s=>{if(db.place[s]===id)db.place[s]=up})})||'Deleted');show()}}});
+   toast(await foldOp(db=>{const i=db.folders.findIndex(z=>z.id===id);if(i<0)return 0;db.folders.splice(i,1);db.folders.forEach(f=>{if(f.parent===id)f.parent=up});Object.keys(db.place).forEach(s=>{if(!/^(tags|name):/.test(s)&&db.place[s]===id)db.place[s]=up})})||'Deleted');show()}}});
  B.querySelectorAll('[data-sm]').forEach(b=>b.onclick=async e=>{e.stopPropagation();const s=b.dataset.sm,inf=FT.secInfo.get(s)||{t:s};
-  const x=await ask({title:'Move “'+inf.t+'” to',sel:foldList(),selv:FT.secOf.get(s)||'root',ok:'Move'});if(x&&x.sel)toast(await foldOp(db=>{db.place[s]=x.sel})||'Moved')});
+  const r=await ask({title:'📄 '+inf.t,acts:[{k:'mov',l:'Move to another folder'},{k:'tag',l:'Edit tags'}]});if(!r)return;
+  if(r.act==='mov'){const x=await ask({title:'Move “'+inf.t+'” to',sel:foldList(),selv:FT.secOf.get(s)||'root',ok:'Move'});if(x&&x.sel)toast(await foldOp(db=>{db.place[s]=x.sel})||'Moved')}
+  else{const x=await ask({title:'Tags for “'+inf.t+'”',msg:'Separate with commas. Search finds them with #tag.',text:(FT.tags.get(s)||[]).join(', '),ok:'Save'});if(x)toast(await foldOp(db=>{if(x.text)db.place['tags:'+s]=x.text;else delete db.place['tags:'+s]})||'Tags saved')}});
  B.querySelectorAll('.chip[data-v]').forEach(b=>b.onclick=()=>{S.sec=b.dataset.v;later={};last=null;cram=false;ahead=0;save();$('menu').close();show()})}
 
 /* ---------- the + button: add folder or cards ---------- */
@@ -632,10 +670,11 @@ function fillWhere(){const cur=$('whr').value||BR||'root',L=foldList();$('whr').
 function tab(c){$('tF').classList.toggle('on',!c);$('tC').classList.toggle('on',c);$('paneF').hidden=c;$('paneC').hidden=!c}
 $('tF').onclick=()=>tab(false);$('tC').onclick=()=>tab(true);
 $('plus').onclick=()=>{applyLock();$('whr').value=BR;fillWhere();$('whr').value=FT.name.has(BR)?BR:'root';imsg('');$('addm').showModal()};
-$('mkf').onclick=async()=>{const nm=$('fname').value.trim();if(!nm){imsg('Type a folder name first.','err');return}
- const parent=$('whr').value||'root';const id=newId();
- const m=await foldOp(db=>{db.folders.push({id,name:nm,parent})},{create:true});
- $('fname').value='';BR=parent;fillWhere();$('whr').value=id;imsg('Created folder “'+nm+'”.'+m,m?'err':'ok')};
+async function whereFor(text){const base=$('whr').value||'root',px=$('cpath').value.trim();if(!px||!parseRaw('x',text).cards.length)return base;const x=await ensurePath(base,px);return x.id}
+$('mkf').onclick=async()=>{const nm=$('fname').value.trim();if(!nm){imsg('Type a folder name or path first.','err');return}
+ const x=await ensurePath($('whr').value||'root',nm);
+ $('fname').value='';BR=x.id;fillWhere();$('whr').value=x.id;
+ imsg(x.created?'Created '+splitPath(nm).join(' / ')+'.'+x.msg:'That folder already exists.',x.msg?'err':'ok')};
 
 /* ---------- highlights + pin notes (personal, saved on this device) ---------- */
 const PINSVG='<svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M14.5 2.5l7 7-2.2.9-3.6 3.6.6 4.2-1.6 1.6-4-4-5.8 5.8-1.2-1.2 5.8-5.8-4-4 1.6-1.6 4.2.6 3.6-3.6z"/></svg>';
@@ -673,7 +712,13 @@ $('ndel').onclick=()=>{const f=findHl(nOpen);if(f){NOTES[f.id]=NOTES[f.id].filte
 $('npop').querySelectorAll('.cl [data-c]').forEach(b=>b.onclick=()=>{const f=findHl(nOpen);if(!f)return;f.l.c=b.dataset.c;saveNotes();$('npop').querySelectorAll('.cl [data-c]').forEach(x=>x.classList.toggle('cur',x===b));renderQ(f.id)});
 $('stage').addEventListener('click',e=>{const t=e.target.closest('.hlm,.pin');if(t&&t.dataset.h){e.preventDefault();e.stopPropagation();if(nOpen)closeNote(true);openNote(t.dataset.h)}});
 document.addEventListener('pointerdown',e=>{if(nOpen&&!e.target.closest('#npop')&&!e.target.closest('.hlm,.pin'))closeNote(true)});
-$('pick').onclick=openMenu;
+$('mback').onclick=()=>navBack();$('mfwd').onclick=()=>navFwd();$('mup').onclick=()=>navUp();
+$('menu').addEventListener('close',()=>{if(menuHist){menuHist=false;if(history.state&&history.state.frm){popFlag=true;history.back()}}});
+window.addEventListener('popstate',()=>{if(popFlag){popFlag=false;return}
+ if($('menu').open){if(navBack()){history.pushState({frm:1},'')}else{menuHist=false;$('menu').close()}}});
+{let sx=0,sy=0;const mb=$('mbody');mb.addEventListener('touchstart',e=>{const t=e.touches[0];sx=t.clientX;sy=t.clientY},{passive:true});
+ mb.addEventListener('touchend',e=>{const t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;if(Math.abs(dy)<45&&Math.abs(dx)>85){if(dx>0){if(!navBack())navUp()}else navFwd()}},{passive:true})}
+$('pick').onclick=()=>openMenu();
 
 /* ---------- search / browse ---------- */
 const bs={f:'all',sel:false,n:40,txt:'',open:null};
@@ -682,7 +727,7 @@ function hl(html,toks){if(!toks.length)return html;const rx=new RegExp('('+toks.
  return html.replace(/(<[^>]+>)|([^<]+)/g,(m,tag,txt)=>tag?tag:txt.replace(rx,'<mark>$1</mark>'))}
 function openBrowse(){$('browse').showModal();renderBrowse(true);if(matchMedia('(pointer:fine)').matches)$('qin').focus()}
 function renderBrowse(keep){
- const toks=bs.txt.toLowerCase().split(/\s+/).filter(Boolean),sel=bs.sel?new Set(pool().map(q=>q.id)):null;
+ const toks=bs.txt.toLowerCase().split(/\s+/).filter(Boolean),sel=bs.sel?new Set(pool().map(q=>q.id)):null,ptoks=toks.map(t=>t.replace(/^#/,'')).filter(Boolean);
  $('bf').innerHTML=BF.map(([v,l])=>`<button class="chip${bs.f===v?' on':''}" data-f="${v}">${l}</button>`).join('')+`<button class="chip${bs.sel?' on':''}" data-sel="1">Only “${esc(selLabel().replace(/ \(\d+\)$/,''))}”</button>`;
  const rows=[];
  for(const q of Q){
@@ -691,17 +736,24 @@ function renderBrowse(keep){
   if(bs.f==='new'&&st!=='new')continue;if(bs.f==='learn'&&st!=='learn')continue;if(bs.f==='due'&&st!=='due')continue;
   if(bs.f==='mature'&&st!=='mature')continue;if(bs.f==='susp'&&st!=='susp')continue;
   if(bs.f==='mark'&&!(c&&c.mark))continue;if(bs.f==='leech'&&!isLeech(c))continue;
-  if(toks.length){const hay=(plain(q.q)+' '+plain(q.c)+' '+q.w.map(plain).join(' ')+' '+q.s+' '+q.n).toLowerCase();if(!toks.every(t=>hay.includes(t)))continue}
+  if(toks.length){const cat=(secPath(q.s).join(' ')+' '+q.s+' '+(FT.tags.get(q.s)||[]).join(' ')).toLowerCase(),hay=(plain(q.q)+' '+plain(q.c)+' '+q.w.map(plain).join(' ')+' '+q.s+' '+q.n+' '+cat).toLowerCase();
+   if(!toks.every(t=>t[0]==='#'?(t.length<2||cat.includes(t.slice(1))):hay.includes(t)))continue}
   rows.push(q);if(rows.length>=bs.n+1&&!bs.open)break}
  const more=rows.length>bs.n,shown=rows.slice(0,bs.n);
- let h=`<div class="gm" style="margin:0 2px 8px">${toks.length||bs.f!=='all'||bs.sel?'Showing '+shown.length+(more?'+':'')+' matches':'Type to search all '+Q.length+' questions'}</div>`;
+ let h='';
+ if(ptoks.length){const mt=a=>{const s=a.toLowerCase();return ptoks.every(t=>s.includes(t))},fo=[],se=[];
+  FT.name.forEach((nm,id)=>{if(id!=='root'&&mt(nm))fo.push(id)});
+  FT.secOf.forEach((f,s)=>{const inf=FT.secInfo.get(s)||{t:s};if(mt(inf.t+' '+(FT.tags.get(s)||[]).join(' ')))se.push(s)});
+  if(fo.length||se.length){h+='<div class="sres"><div class="sh">Folders, sets and tags</div>'+fo.slice(0,6).map(id=>`<div class="frow" role="button" tabindex="0" data-gof="${attr(id)}"><span class="ic">📁</span><span class="tx"><b>${esc(FT.name.get(id))}</b><small>${esc(fpath(FT.parent.get(id)||'root').join(' › ')||'Library')}</small></span></div>`).join('')+se.slice(0,6).map(s=>{const inf=FT.secInfo.get(s)||{t:s,n:''};return`<div class="frow" role="button" tabindex="0" data-gos="${attr(s)}"><span class="ic">📄</span><span class="tx"><b>${esc((inf.n?inf.n+' · ':'')+inf.t)}</b><small>${esc(secPath(s).join(' › '))}</small>${(FT.tags.get(s)||[]).map(t=>`<span class="tg">#${esc(t)}</span>`).join('')}</span></div>`}).join('')+'</div><div class="sh">Questions</div>'}}
+ h+=`<div class="gm" style="margin:0 2px 8px">${toks.length||bs.f!=='all'||bs.sel?'Showing '+shown.length+(more?'+':'')+' matches':'Type to search all '+Q.length+' questions'}</div>`;
  shown.forEach(q=>{const[s,sl]=stateOf(q),o=bs.open===String(q.id);
-  h+=`<div class="res${o?' open':''}" data-id="${q.id}"><button class="rh"><span class="num">${esc(q.n||'')}</span><span class="rq">${hl(q.q,toks)}</span><span class="st st-${s}">${sl}</span></button>`;
+  h+=`<div class="res${o?' open':''}" data-id="${q.id}"><button class="rh"><span class="num">${esc(q.n||'')}</span><span class="rq">${hl(q.q,toks.map(t=>t.replace(/^#/,'')).filter(Boolean))}<span class="rpath">${esc(secPath(q.s).join(' › '))}${(FT.tags.get(q.s)||[]).map(t=>' #'+t).join('')}</span></span><span class="st st-${s}">${sl}</span></button>`;
   if(o){const c=S.cards[q.id];
    h+=`<div class="rd"><ul><li class="c">✓ ${hl(q.c,toks)}</li>${q.w.map(w=>`<li>${hl(w,toks)}</li>`).join('')}</ul><div class="info">${esc(q.t)}<br>${infoHTML(q)}</div>
    <div class="row"><button class="solid" data-act="study">Study now</button><button class="ghost" data-act="mark">${c&&c.mark?'★ Unmark':'☆ Mark'}</button><button class="ghost" data-act="susp">${c&&c.susp?'Unsuspend':'Suspend'}</button>${c&&!isNew(c)?'<button class="ghost" data-act="reset">Reset card</button>':''}</div></div>`}
   h+='</div>'});
  if(more)h+='<div class="row"><button class="ghost wide" id="bmore">Show more</button></div>';
+ setTimeout(()=>{$('bres').querySelectorAll('[data-gof]').forEach(b=>b.onclick=()=>{BR=b.dataset.gof;BH=[];BW=[];$('browse').close();openMenu(true)});$('bres').querySelectorAll('[data-gos]').forEach(b=>b.onclick=()=>{S.sec=b.dataset.gos;later={};last=null;cram=false;ahead=0;save();$('browse').close();show()})},0);
  if(!shown.length)h+='<p class="info">No questions match.</p>';
  const sc=$('bres'),y=keep?0:sc.scrollTop;$('bres').innerHTML=h;sc.scrollTop=y;
  $('bf').querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{bs.f=b.dataset.f;bs.n=40;renderBrowse()});
@@ -838,14 +890,14 @@ function renderPacks(){const sh=SHARED.packs.length,mine=DATA.packs,seen=new Set
  $('packs').querySelectorAll('button[data-d]').forEach(b=>b.onclick=()=>{const pk=DATA.packs[+b.dataset.d],f=packFile(pk);dl(f.file,f.json);imsg('Downloaded '+f.file+'. Put it in data/packs/ on GitHub, then update data/index.json.','ok')});
  $('packs').querySelectorAll('button[data-i]').forEach(b=>b.onclick=()=>{const P=DATA.packs.slice();if(!confirm('Remove "'+P[+b.dataset.i].name+'" from this device? Your progress on its cards is kept in case you add it again.'))return;P.splice(+b.dataset.i,1);savePacks(P);buildQ();if(!validSel(S.sec))S.sec='all';save();renderPacks();imsg('Removed.','ok');later={};last=null;stats()})}
 /* Appends: every upload is kept; cards already in the library (same question text) are skipped */
-async function addPack(name,text,where){if(!isOwner())return{ok:false,msg:'Locked. Unlock with the password first.'};const r=parsePack(name,text);
+async function addPack(name,text,where,tags){if(!isOwner())return{ok:false,msg:'Locked. Unlock with the password first.'};const r=parsePack(name,text);
  if(!r.cards.length)return{ok:false,msg:name+': no questions found.'+(r.errs.length?'\n'+r.errs.slice(0,6).join('\n'):'')};
  const seen=new Set(Q.map(c=>String(c.id)));let add=0,dup=0;
  r.cards.forEach(c=>{const k=String(c.id);if(seen.has(k))dup++;else{seen.add(k);add++}});
  const skip=r.errs.length?`\n${r.errs.length} bad line${r.errs.length>1?'s':''} skipped:\n`+r.errs.slice(0,6).join('\n')+(r.errs.length>6?'\n…and '+(r.errs.length-6)+' more':''):'';
  if(!add)return{ok:true,msg:`${name}: nothing new. All ${dup} questions are already in your library.`+skip};
  let note='';const known=new Set(Q.map(q=>q.s));
- const place=async()=>{if(!where)return'';const ns=[...new Set(r.cards.map(c=>c.s))].filter(s=>!known.has(s));if(!ns.length)return'';return await foldOp(db=>{ns.forEach(s=>{db.place[s]=where})})};
+ const place=async()=>{if(!where&&!tags)return'';const ns=[...new Set(r.cards.map(c=>c.s))].filter(s=>!known.has(s));if(!ns.length)return'';return await foldOp(db=>{ns.forEach(s=>{if(where)db.place[s]=where;if(tags)db.place['tags:'+s]=tags})})};
  if(gh()){try{const raw=parseRaw(name,text).cards,n=await pushCards(raw);
   SHARED.packs.push({name:'Community cards (just added)',cards:raw,at:Date.now()});buildQ();const pm=await place();renderPacks();later={};last=null;stats();
   return{ok:true,msg:`${name}: ${add} new card${add>1?'s':''} saved to the shared database${dup?', '+dup+' already there (skipped)':''}. It appears for everyone in about a minute. Library now has ${Q.length} cards.`+pm+skip}}
@@ -855,8 +907,8 @@ async function addPack(name,text,where){if(!isOwner())return{ok:false,msg:'Locke
  buildQ();const pm=await place();renderPacks();later={};last=null;stats();
  return{ok:true,msg:`${name}: ${add} new card${add>1?'s':''} added${dup?', '+dup+' already there (skipped)':''}. Library now has ${Q.length} cards.`+note+pm+skip}}
 function mergePacks(list){const ALL=loadPacks(),P=DATA.packs.slice();let k=0;(list||[]).forEach(p=>{if(!p||!p.text||ALL.some(z=>z.text===p.text))return;const x={name:uniqName(ALL,p.name||'restored.txt'),text:p.text,at:p.at||Date.now()};ALL.push(x);P.push(x);k++});if(k)savePacks(P);buildQ();return k}
-$('fil').onchange=async e=>{const out=[];let bad=false;for(const f of e.target.files){const r=await addPack(f.name,await f.text(),$('whr').value);out.push(r.msg);if(!r.ok)bad=true}if(out.length)imsg(out.join('\n'),bad?'err':'ok');e.target.value=''};
-$('addp').onclick=async()=>{const t=$('paste').value;if(!t.trim())return;const r=await addPack('pasted-'+new Date().toISOString().slice(0,16).replace(/[T:]/g,'-')+'.txt',t,$('whr').value);imsg(r.msg,r.ok?'ok':'err');if(r.ok)$('paste').value=''};
+$('fil').onchange=async e=>{const out=[];let bad=false;for(const f of e.target.files){const txt=await f.text(),w=await whereFor(txt),r=await addPack(f.name,txt,w,$('ctags').value.trim());out.push(r.msg);if(!r.ok)bad=true}if(out.length)imsg(out.join('\n'),bad?'err':'ok');e.target.value=''};
+$('addp').onclick=async()=>{const t=$('paste').value;if(!t.trim())return;const w=await whereFor(t),r=await addPack('pasted-'+new Date().toISOString().slice(0,16).replace(/[T:]/g,'-')+'.txt',t,w,$('ctags').value.trim());imsg(r.msg,r.ok?'ok':'err');if(r.ok)$('paste').value=''};
 /* ---------- backup + publish ---------- */
 const smsg=(t,c)=>{const e=$('smsg');if(e){e.textContent=t;e.className='n '+(c||'')}};
 const dl=(name,text)=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:'application/json'}));a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},4000)};
