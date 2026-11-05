@@ -1,0 +1,25 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Flight Recall setup</title>
+<style>body{font:16px system-ui,sans-serif;max-width:520px;margin:24px auto;padding:0 16px;line-height:1.45}input{width:100%;padding:10px;margin:4px 0 12px;font:inherit;box-sizing:border-box}button{padding:12px 18px;font:inherit;font-weight:600}small{color:#666}#o{white-space:pre-wrap;color:#0a6}</style></head><body>
+<h2>Flight Recall: connect the shared database</h2>
+<p>Run this once. Everything happens in your browser; the token is never sent anywhere. It makes <b>config.json</b>, which holds your token locked with the password.</p>
+<label>GitHub repo (username/repo)<input id="repo" placeholder="yourname/flight-recall"></label>
+<label>Branch<input id="br" value="main"></label>
+<label>Fine-grained token (this repo only, Contents: Read and write)<input id="tok" type="password" autocomplete="off"></label>
+<label>Password to give to your card-adders (use 12+ characters)<input id="pw" autocomplete="off"></label>
+<button id="go">Make config.json</button><p id="o"></p>
+<script>
+const $=i=>document.getElementById(i),b64=u=>{let s='';u.forEach(x=>s+=String.fromCharCode(x));return btoa(s)};
+$('go').onclick=async()=>{const o=$('o');o.style.color='#0a6';
+ const repo=$('repo').value.trim(),br=$('br').value.trim()||'main',tok=$('tok').value.trim(),pw=$('pw').value.trim().toUpperCase();
+ if(!/^[\w.-]+\/[\w.-]+$/.test(repo)||!tok||pw.length<8){o.style.color='#c00';o.textContent='Fill in repo, token and a password (8+ characters).';return}
+ try{
+  const salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12)),it=300000;
+  const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);
+  const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:it,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['encrypt']);
+  const ct=new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv},key,new TextEncoder().encode(tok)));
+  const cfg={v:1,repo,branch:br,path:'data/added.json',it,salt:b64(salt),iv:b64(iv),ct:b64(ct)};
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(cfg,null,1)],{type:'application/json'}));a.download='config.json';document.body.appendChild(a);a.click();
+  o.textContent='Done. Put config.json inside the data folder on GitHub. Your password is: '+pw+' (the app ignores upper/lower case).';
+ }catch(e){o.style.color='#c00';o.textContent='This needs the https website link (or localhost), not a plain file.'}};
+</script>
+</body></html>
