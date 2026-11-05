@@ -57,14 +57,9 @@
    "parent": "fmw3ji6aji31"
   },
   {
-   "id": "fmw3ji7qfz3r",
-   "name": "Material",
-   "parent": "root"
-  },
-  {
    "id": "fmw3ji7qfp7l",
    "name": "get_ready",
-   "parent": "fmw3ji7qfz3r"
+   "parent": "root"
   }
  ],
  "place": {
