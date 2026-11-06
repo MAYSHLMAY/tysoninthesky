@@ -726,6 +726,534 @@
     "Rudder deflection pushing tail air outward"
    ],
    "at": 1793857029964
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "What does the drawing board slide (24) show?",
+   "c": "Two boards, a movable (portable flat) board and an adjustable (stand-mounted, tiltable) drawing table.",
+   "w": [
+    "Two fixed wall-mounted boards",
+    "A light table and a computer monitor",
+    "A board with a built-in printer"
+   ],
+   "at": 1793937688999
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "Which three jobs is the T-square used for?",
+   "c": "Drawing horizontal lines, guiding triangles/set squares, and positioning drawing paper.",
+   "w": [
+    "Drawing circles, measuring angles, and erasing",
+    "Drawing vertical lines, dimensioning, and shading",
+    "Dividing lines, drawing arcs, and lettering"
+   ],
+   "at": 1793937688999
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "The T-square picture on slide 25 labels two parts. What are they?",
+   "c": "The head (stock) and the blade.",
+   "w": [
+    "The beam and the socket",
+    "The needle and the pencil leg",
+    "The bow and the nib"
+   ],
+   "at": 1793937688999
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "Which statement about the T-square is FALSE?",
+   "c": "Its head slides along the top edge of the board to draw vertical lines directly.",
+   "w": [
+    "It is used to draw horizontal lines",
+    "Triangles are guided along its blade",
+    "It helps position the drawing paper"
+   ],
+   "at": 1793937688999
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "What do the six small views on slide 26 show?",
+   "c": "The T-square with triangles used to draw horizontal, vertical and inclined lines at standard angles.",
+   "w": [
+    "The T-square being used to draw circles and arcs",
+    "How to sharpen a pencil",
+    "How to fold a drawing"
+   ],
+   "at": 1793937689000
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "Which three things are triangles (set squares) used for?",
+   "c": "Drawing vertical lines, lines at standard angles, and angles that are multiples of 15 degrees.",
+   "w": [
+    "Drawing horizontal lines only, circles, and arcs",
+    "Measuring scale, dividing lines, and erasing",
+    "Drawing irregular curves, ellipses, and borders"
+   ],
+   "at": 1793937689000
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "What is the scale formula given in the deck?",
+   "c": "Scale = drawing size / actual size.",
+   "w": [
+    "Scale = actual size / drawing size",
+    "Scale = drawing size x actual size",
+    "Scale = actual size - drawing size"
+   ],
+   "at": 1793937689000
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "A scale of 2:1 on the scale table belongs to which column?",
+   "c": "Enlarged.",
+   "w": [
+    "Same size",
+    "Reduced",
+    "None of them"
+   ],
+   "at": 1793937689000
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "Which scale ratio belongs to the \"Same size\" column?",
+   "c": "1:1.",
+   "w": [
+    "1:2",
+    "2:1",
+    "1:10"
+   ],
+   "at": 1793937689000
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "Which of the following scales is a REDUCTION scale in the table?",
+   "c": "1:100.",
+   "w": [
+    "10:1",
+    "50:1",
+    "2:1"
+   ],
+   "at": 1793937689001
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "What is the largest enlargement and the largest reduction scale shown on the table?",
+   "c": "2000:1 enlarged and 1:1000 reduced.",
+   "w": [
+    "1000:1 enlarged and 1:2000 reduced",
+    "200:1 enlarged and 1:100 reduced",
+    "50:1 enlarged and 1:50 reduced"
+   ],
+   "at": 1793937689001
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "What two properties of scales are stated in the deck?",
+   "c": "They are made from different materials and with different divisions.",
+   "w": [
+    "They are made only from wood and have one division",
+    "They are always triangular and metal",
+    "They are electronic and self-calibrating"
+   ],
+   "at": 1793937689001
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "What tool draws circles and arcs?",
+   "c": "The compass.",
+   "w": [
+    "The divider",
+    "The protractor",
+    "The French curve"
+   ],
+   "at": 1793937689001
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "How is the beam compass different from an ordinary compass?",
+   "c": "It has a beam with sliding sockets carrying steel or pencil points and is used for drawing large circles.",
+   "w": [
+    "It has two fixed legs and draws only small arcs",
+    "It has a ruler and a pen for straight lines",
+    "It is an electronic circle plotter"
+   ],
+   "at": 1793937689001
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "What are French curves used for, and what rule applies to aligning them?",
+   "c": "Drawing irregular curves; align a minimum of three points of the curve.",
+   "w": [
+    "Drawing straight lines; align a minimum of two points",
+    "Drawing circles; align a minimum of four points",
+    "Drawing ellipses only; align one point"
+   ],
+   "at": 1793937689002
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "Which statement about drawing templates is TRUE?",
+   "c": "They are patterns that serve as a guide and contain circles, squares, rectangles, arcs and similar shapes.",
+   "w": [
+    "They are used only for dividing lines",
+    "They are made only for freehand lettering",
+    "They replace the need for any scale"
+   ],
+   "at": 1793937689002
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "What are the two templates in the picture on slide 32?",
+   "c": "A yellow template with various shapes and a green template with circles and arcs.",
+   "w": [
+    "Two protractors",
+    "Two erasing shields",
+    "Two rapidographs"
+   ],
+   "at": 1793937689002
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "How are dividers similar to compasses, and what are they used for?",
+   "c": "They look similar, and are used to lay off distances from a scale or other parts of the drawing.",
+   "w": [
+    "They are electronic and measure voltage",
+    "They draw circles with ink",
+    "They measure angles in degrees"
+   ],
+   "at": 1793937689002
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "What method is used with dividers to divide a line into n equal parts?",
+   "c": "Trial and error.",
+   "w": [
+    "Exact formula",
+    "Protractor reading",
+    "Triangle projection"
+   ],
+   "at": 1793937689002
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "What is a protractor and in what units does it usually measure?",
+   "c": "A circular or semicircular tool for measuring an angle or circle, usually in degrees.",
+   "w": [
+    "A tool for drawing circles, measured in millimetres",
+    "A tool for erasing, measured in grams",
+    "A tool for scaling, measured in ratios"
+   ],
+   "at": 1793937689003
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "The protractor in the picture on slide 34 is which shape, and what is the maximum reading?",
+   "c": "Semicircular, reading up to 180 degrees.",
+   "w": [
+    "Full circle, reading up to 360 degrees",
+    "Rectangular, reading up to 100",
+    "Triangular, reading up to 90"
+   ],
+   "at": 1793937689003
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "What is the purpose of the erasing shield?",
+   "c": "It allows erasers to be used through it to erase lines and text without removing nearby lines that must stay.",
+   "w": [
+    "It protects the pencil from breaking",
+    "It protects the board from scratches",
+    "It holds the paper flat"
+   ],
+   "at": 1793937689003
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "How is the pencil sharpener operated?",
+   "c": "Manually or by electric motor.",
+   "w": [
+    "Only by hand",
+    "Only by electric motor",
+    "Only by pressure"
+   ],
+   "at": 1793937689003
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "Which of these is NOT listed as a drawing material (an item consumed with use)?",
+   "c": "Compass.",
+   "w": [
+    "Paper",
+    "Eraser",
+    "Rapidography"
+   ],
+   "at": 1793937689003
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "Which five items are listed as drawing materials?",
+   "c": "Paper, pencil, eraser, drafting tape, and rapidography.",
+   "w": [
+    "Paper, compass, scale, triangle, and tape",
+    "Pencil, divider, protractor, eraser, and ink",
+    "Board, T-square, pencil, tape, and paper"
+   ],
+   "at": 1793937689003
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "What are the drawing paper types listed?",
+   "c": "Rectangular grid, white plan paper, and tracing paper.",
+   "w": [
+    "Carbon paper, newsprint, and cardboard",
+    "Graph paper only",
+    "Photographic paper and tissue"
+   ],
+   "at": 1793937689003
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "What does the drawing sheet determine?",
+   "c": "The selection of the pencil grade.",
+   "w": [
+    "The selection of the border line",
+    "The size of the title block",
+    "The scale of the drawing"
+   ],
+   "at": 1793937689004
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "What are the A-series drawing sheet sizes on slide 39 in mm?",
+   "c": "A4 210 x 297, A3 297 x 420, A2 420 x 594, A1 594 x 841, A0 841 x 1189.",
+   "w": [
+    "A4 200 x 290, A3 290 x 400, A2 400 x 580, A1 580 x 800, A0 800 x 1100",
+    "A4 297 x 420, A3 420 x 594, A2 594 x 841, A1 841 x 1189, A0 1189 x 1500",
+    "A4 148 x 210, A3 210 x 297, A2 297 x 420, A1 420 x 594, A0 594 x 841"
+   ],
+   "at": 1793937689004
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "Which sheet is the largest and which is the smallest on the sheet-size chart?",
+   "c": "A0 is the largest and A4 is the smallest.",
+   "w": [
+    "A4 is the largest and A0 is the smallest",
+    "A1 is the largest and A3 is the smallest",
+    "A2 is the largest and A0 is the smallest"
+   ],
+   "at": 1793937689004
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "How do the sheet sizes change from A4 up to A0 on the chart?",
+   "c": "Each size is a trimmed or doubled version of the next, shown as nested rectangles with A0 the outermost.",
+   "w": [
+    "They all have the same area",
+    "They get narrower but longer",
+    "They are unrelated to each other"
+   ],
+   "at": 1793937689004
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "Most drawing pencil leads are made from what, and in how many degrees of hardness?",
+   "c": "Graphite, in 17 degrees of hardness.",
+   "w": [
+    "Charcoal, in 9 degrees",
+    "Carbon fibre, in 20 degrees",
+    "Wax, in 5 degrees"
+   ],
+   "at": 1793937689004
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "Which pencil is the hardest and which is the softest and blackest?",
+   "c": "9H is the hardest; 6B is the softest and blackest.",
+   "w": [
+    "6H is the hardest; 9B is the softest",
+    "9B is the hardest; 6H is the softest",
+    "HB is the hardest; F is the softest"
+   ],
+   "at": 1793937689005
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "Place these in order from hardest to softest: HB, 2H, F, B, 6B.",
+   "c": "2H, F, HB, B, 6B.",
+   "w": [
+    "6B, B, HB, F, 2H",
+    "F, 2H, HB, B, 6B",
+    "HB, F, 2H, B, 6B"
+   ],
+   "at": 1793937689005
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "What do the letters mean: F, HB, and H?",
+   "c": "F is intermediate between soft and hard; HB is medium soft; H is medium hard.",
+   "w": [
+    "F is very hard; HB is extra soft; H is soft",
+    "F is soft; HB is hard; H is intermediate",
+    "F is firm black; HB is hardest; H is hardest and blackest"
+   ],
+   "at": 1793937689005
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "Which statement about pencil grades is FALSE?",
+   "c": "5B is extra hard and 4B is extremely hard.",
+   "w": [
+    "5B is extremely soft",
+    "4H is very hard",
+    "3B is very soft"
+   ],
+   "at": 1793937689005
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "Which grade is described as \"extremely hard, plus\"?",
+   "c": "8H.",
+   "w": [
+    "7H",
+    "9H",
+    "6H"
+   ],
+   "at": 1793937689005
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "Which factors guide the selection of a drawing pencil?",
+   "c": "The type and quality of the drawing paper, and how thick and dark you want the line to be.",
+   "w": [
+    "The price of the pencil and the colour of the barrel",
+    "The length of the pencil and the user's hand size",
+    "The size of the title block only"
+   ],
+   "at": 1793937689005
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "How should pencil lines be?",
+   "c": "Clean and sharp, and dark enough for the views to be seen when the standard lines are drawn.",
+   "w": [
+    "Faint and wide so that they can be erased",
+    "Thick and fuzzy",
+    "Light for visible lines"
+   ],
+   "at": 1793937689006
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "What happens if you use too much pressure with a pencil, and how can you avoid it?",
+   "c": "You will groove the drawing surface; use the proper grade of lead.",
+   "w": [
+    "The pencil will break; use a softer pencil",
+    "The paper will turn yellow; use tape",
+    "The line will fade; use ink"
+   ],
+   "at": 1793937689006
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "What should you do with the pencil as you draw a line?",
+   "c": "Turn the pencil between your thumb and forefinger.",
+   "w": [
+    "Hold it still without rotating",
+    "Press down at a steep angle",
+    "Tilt it only to one side"
+   ],
+   "at": 1793937689006
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "What do \"eraser\" and \"rubber\" mean in the deck?",
+   "c": "Eraser is the US term and rubber is the UK term for the article used to rub out pencil and also pen mistakes.",
+   "w": [
+    "Rubber is the US term and eraser is the UK term",
+    "They are different tools for ink only",
+    "Eraser is for pen and rubber is for pencil"
+   ],
+   "at": 1793937689006
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "What is drafting tape used for?",
+   "c": "Holding drawings, sketches, blueprints or other papers to drawing boards.",
+   "w": [
+    "Measuring lengths",
+    "Joining torn drawings permanently",
+    "Erasing lines"
+   ],
+   "at": 1793937689006
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "What is a rapidograph?",
+   "c": "A type of drawing pen by which lines are drawn on tracing paper.",
+   "w": [
+    "A type of pencil with hard lead",
+    "A type of scale",
+    "A type of eraser"
+   ],
+   "at": 1793937689006
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "Which properties of rapidograph ink are listed?",
+   "c": "Light resistant, waterproof, precise and consistent for any application.",
+   "w": [
+    "Fast-drying, erasable and thick",
+    "Colourful and transparent",
+    "Cheap, light and removable"
+   ],
+   "at": 1793937689006
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "What is the difference between a compass and a divider?",
+   "c": "A compass draws circles and arcs, while a divider lays off distances without drawing curves.",
+   "w": [
+    "A compass lays off distances, while a divider draws circles",
+    "They are identical in use",
+    "A divider measures angles"
+   ],
+   "at": 1793937689007
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "Which tool and purpose are mismatched?",
+   "c": "Protractor: drawing irregular curves.",
+   "w": [
+    "T-square: drawing horizontal lines",
+    "French curve: drawing irregular curves",
+    "Erasing shield: erasing without disturbing nearby lines"
+   ],
+   "at": 1793937689007
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "Which tool is paired correctly with its image on slide 36?",
+   "c": "Pencil sharpener: a manual coloured set and an electric desktop sharpener.",
+   "w": [
+    "Pencil sharpener: a protractor and compass",
+    "Pencil sharpener: a drafting tape and eraser",
+    "Pencil sharpener: a T-square and triangle"
+   ],
+   "at": 1793937689007
+  },
+  {
+   "s": "1.6 Care and Use of Drafting Tools",
+   "q": "What items do the pictures on slide 42 (eraser) and 43 (drafting tape) show?",
+   "c": "A pink/blue eraser and a white PILOT eraser; rolls of drafting tape and a sheet taped at its corners on a board.",
+   "w": [
+    "Two pencils and a ruler",
+    "Two compasses",
+    "Two protractors"
+   ],
+   "at": 1793937689007
   }
  ]
 }
